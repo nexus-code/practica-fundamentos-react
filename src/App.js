@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { UserProvider } from './context/UserContext'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import Register from './components/Register/Register';
-// import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'; // precisa instalar dependencias
+import Nodepop from './components/Nodepop/Nodepop';
 
 
 export default class App extends Component {
@@ -26,7 +28,14 @@ export default class App extends Component {
       <div>
         {console.log('App:this.user:', this.user)}
         <UserProvider value={this.state}>
-          <Register></Register>
+          <Router>
+            <Switch>
+              <Route exact path="/register" component={Register} />
+              <Route exact path='/home' component={Nodepop} />
+
+              <Route component={Register} />
+            </Switch>
+          </Router>
         </UserProvider>
       </div>
     );
