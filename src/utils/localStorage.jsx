@@ -6,6 +6,9 @@
 
 
 export const setUserLS = user => {
+
+  console.log('setUserLS');
+
   localStorage.setItem('data', JSON.stringify(user));
 };
 
@@ -16,6 +19,6 @@ export const getUserLS = () => {
 };
 
 // export const deleteStorage = () => {
-export const clearLS = () => {
+export const clearLocalStorage = () => {
   localStorage.clear();
 }

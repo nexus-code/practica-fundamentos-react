@@ -9,15 +9,10 @@ import Nodepop from './components/Nodepop/Nodepop';
 export default class App extends Component {
   constructor(props) {
     super(props);
+
     this.updateUser = this.updateUser.bind(this);
     this.state = {
       user: {},
-      // user: {
-      //   name: '',
-      //   surname: '',
-      //   tags: ''
-      // },
-
       updateUser: this.updateUser
     }
   }
@@ -25,10 +20,13 @@ export default class App extends Component {
   updateUser(user) {
     
     console.log('App.updateUser');
-    this.setState({ user })
+    this.setState({ user });
+    console.log('App this.state', this.state);
+
   }
 
   render() {
+    console.log('init', this.state);
     return (
       <div>
         <UserProvider value={this.state}>

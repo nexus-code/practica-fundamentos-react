@@ -4,9 +4,15 @@ import { UserContext, UserConsumer } from '../../context/UserContext'
 import { setUserLS } from '../../utils/localStorage';
 
 export default class Register extends React.Component { 
+
+    static contextType = UserContext;
     
     constructor(props) {
         super(props);
+
+        console.log('init Register props', props);
+
+
         this.state = {
             user: {
                 name: '',
@@ -22,7 +28,7 @@ export default class Register extends React.Component {
     handleChange(event) {
 
         const { name, value } = event.target;
-
+        
         this.setState(({ user }) => ({
             user: {
                 ...user,
@@ -30,60 +36,65 @@ export default class Register extends React.Component {
             }
         }));
 
-        console.log('this.state', this.state);
     }
 
     handleSubmit(event) {
         event.preventDefault();
 
-        if (this.state.user.name.trim().length <= 3) {
-            alert("The name must be bigger than 3 characters");
-            return;
-        }
+        console.log('this.context onSubmit', this.context);
+        console.log('this.state onSubmit', this.state);
 
-        if (this.state.user.surname.trim().length <= 3) {
-            alert("The surname must be bigger than 3 characters");
-            return;
-        }
+
+        // if (this.state.user.name.trim().length <= 3) {
+        //     alert("The name must be bigger than 3 characters");
+        //     return;
+        // }
+
+        // if (this.state.user.surname.trim().length <= 3) {
+        //     alert("The surname must be bigger than 3 characters");
+        //     return;
+        // }
 
         // Tags pending
 
         setUserLS(this.state.user);
-        console.log(this.context);
-        // return true;
-        
-        //this.goHome();
-    }
+        // console.log('this.context onSubmit2', this.context);
 
-    goHome(){
-        // if there's going to be a back button or similar. 
-        // Attention empty user
-        this.props.history.push('/home');
+        return true;
     }
 
     render (){
         
+        const {name, surname, tags} = this.state.user;
+
         return (
             <UserConsumer>
                 {({ user, updateUser }) => (
+
 
                     <div
                         className="well"
                         style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}
                     >
                         <h2>Wellcome to WallaKeep</h2>
-                        <Form onSubmit={this.handleSubmit}>
-                            <Form.Group controlId="formGroupname" onChange={this.handleChange} >
+                        <Form onSubmit={event => {
+                            if (this.handleSubmit(event)) {
+                                updateUser(this.state.user);
+                                // console.log(this.context.user);
+                                this.props.history.push("/home");
+                            }
+                        }}>
+                            <Form.Group controlId="formGroupname" >
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control name="name" placeholder="Enter name" required />
+                                <Form.Control name="name" placeholder="Enter name" value={ name } onChange={this.handleChange} />
                             </Form.Group>
-                            <Form.Group controlId="formGroupsurname" onChange={this.handleChange} >
+                            <Form.Group controlId="formGroupsurname" >
                                 <Form.Label>Surname</Form.Label>
-                                <Form.Control name="surname" placeholder="surname" required />
+                                <Form.Control name="surname" placeholder="surname" value={ surname } onChange={this.handleChange} />
                             </Form.Group>
-                            <Form.Group controlId="formGrouptags" onChange={this.handleChange} >
+                            <Form.Group controlId="formGrouptags" >
                                 <Form.Label>Tags</Form.Label>
-                                <Form.Control name="tags" placeholder="tags" required />
+                                <Form.Control name="tags" placeholder="tags" value={ tags } onChange={this.handleChange} />
                             </Form.Group>
 
                             <Button variant="primary" type="submit">
@@ -96,5 +107,3 @@ export default class Register extends React.Component {
         );
     }
 }
-
-Register.contextType = UserContext;
