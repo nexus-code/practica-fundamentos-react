@@ -6,22 +6,21 @@ export default class Nodepop extends React.Component {
 
     static contextType = UserContext;
 
-    constructor(props) {
-        super(props);
-        this.goHome = this.goHome.bind(this);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     componentDidMount() {
-        console.log(this.props);
-        // this.updateUserFromStorage();
+        console.log('Nodepop Props', this.props);
     }
 
     render() {
         const { user } = this.context;
+        console.log('context', this.context);
 
         return (
             <div>
-                {user}
+                <h2>Hi {user.name}!</h2>
             </div>
         )
     }

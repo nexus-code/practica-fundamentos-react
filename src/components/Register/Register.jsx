@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Button } from 'react-bootstrap';
-import { UserConsumer } from '../../context/UserContext'
+import { UserContext, UserConsumer } from '../../context/UserContext'
 import { setUserLS } from '../../utils/localStorage';
 
 export default class Register extends React.Component { 
@@ -29,6 +29,8 @@ export default class Register extends React.Component {
                 [name]: value
             }
         }));
+
+        console.log('this.state', this.state);
     }
 
     handleSubmit(event) {
@@ -47,9 +49,17 @@ export default class Register extends React.Component {
         // Tags pending
 
         setUserLS(this.state.user);
-        return true;
+        console.log(this.context);
+        // return true;
+        
+        //this.goHome();
     }
 
+    goHome(){
+        // if there's going to be a back button or similar. 
+        // Attention empty user
+        this.props.history.push('/home');
+    }
 
     render (){
         
@@ -86,3 +96,5 @@ export default class Register extends React.Component {
         );
     }
 }
+
+Register.contextType = UserContext;

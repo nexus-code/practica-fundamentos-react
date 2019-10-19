@@ -12,6 +12,11 @@ export default class App extends Component {
     this.updateUser = this.updateUser.bind(this);
     this.state = {
       user: {},
+      // user: {
+      //   name: '',
+      //   surname: '',
+      //   tags: ''
+      // },
 
       updateUser: this.updateUser
     }
@@ -26,7 +31,6 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        {console.log('App:this.user:', this.user)}
         <UserProvider value={this.state}>
           <Router>
             <Switch>
