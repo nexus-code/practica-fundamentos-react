@@ -12,7 +12,6 @@ export default class Register extends React.Component {
 
         console.log('init Register props', props);
 
-
         this.state = {
             user: {
                 name: '',
@@ -65,7 +64,7 @@ export default class Register extends React.Component {
 
     render (){
         
-        const {name, surname, tags} = this.state.user;
+        const {name, surname, tags} = this.context.user;
 
         return (
             <UserConsumer>
