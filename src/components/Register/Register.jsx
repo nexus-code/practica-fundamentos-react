@@ -5,8 +5,7 @@ import { setUserLS } from '../../utils/localStorage';
 
 export default class Register extends React.Component { 
 
-    static contextType = UserContext;
-    
+   
     constructor(props) {
         super(props);
 
@@ -44,22 +43,22 @@ export default class Register extends React.Component {
         console.log('this.state onSubmit', this.state);
 
 
-        // if (this.state.user.name.trim().length <= 3) {
-        //     alert("The name must be bigger than 3 characters");
-        //     return;
-        // }
+        if (this.state.user.name.trim().length <= 3) {
+            alert("The name must be bigger than 3 characters");
+            return;
+        }
 
-        // if (this.state.user.surname.trim().length <= 3) {
-        //     alert("The surname must be bigger than 3 characters");
-        //     return;
-        // }
+        if (this.state.user.surname.trim().length <= 3) {
+            alert("The surname must be bigger than 3 characters");
+            return;
+        }
 
         // Tags pending
 
         setUserLS(this.state.user);
-        // console.log('this.context onSubmit2', this.context);
 
-        return true;
+        this.context.updateUser(this.state.user);
+        this.props.history.push("/home");
     }
 
     render (){
@@ -67,42 +66,30 @@ export default class Register extends React.Component {
         const {name, surname, tags} = this.context.user;
 
         return (
-            <UserConsumer>
-                {({ user, updateUser }) => (
 
+            <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
+                <h2>Wellcome to WallaKeep</h2>
+                <Form onSubmit = { this.handleSubmit }>
+                    <Form.Group controlId="formGroupname" >
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control name="name" placeholder="Enter name" value={ name } onChange={ this.handleChange } />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupsurname" >
+                        <Form.Label>Surname</Form.Label>
+                        <Form.Control name="surname" placeholder="surname" value={ surname } onChange={ this.handleChange } />
+                    </Form.Group>
+                    <Form.Group controlId="formGrouptags" >
+                        <Form.Label>Tags</Form.Label>
+                        <Form.Control name="tags" placeholder="tags" value={ tags } onChange={ this.handleChange } />
+                    </Form.Group>
 
-                    <div
-                        className="well"
-                        style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}
-                    >
-                        <h2>Wellcome to WallaKeep</h2>
-                        <Form onSubmit={event => {
-                            if (this.handleSubmit(event)) {
-                                updateUser(this.state.user);
-                                // console.log(this.context.user);
-                                this.props.history.push("/home");
-                            }
-                        }}>
-                            <Form.Group controlId="formGroupname" >
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control name="name" placeholder="Enter name" value={ name } onChange={this.handleChange} />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupsurname" >
-                                <Form.Label>Surname</Form.Label>
-                                <Form.Control name="surname" placeholder="surname" value={ surname } onChange={this.handleChange} />
-                            </Form.Group>
-                            <Form.Group controlId="formGrouptags" >
-                                <Form.Label>Tags</Form.Label>
-                                <Form.Control name="tags" placeholder="tags" value={ tags } onChange={this.handleChange} />
-                            </Form.Group>
-
-                            <Button variant="primary" type="submit">
-                                Access
-                            </Button>
-                        </Form>
-                    </div>
-                )}
-            </UserConsumer>
+                    <Button variant="primary" type="submit">
+                        Access
+                    </Button>
+                </Form>
+            </div>
         );
     }
 }
+
+Register.contextType = UserContext;
