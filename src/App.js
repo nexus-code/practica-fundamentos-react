@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Register from './components/Register/Register';
 import Nodepop from './components/Nodepop/Nodepop';
+import Profile from './components/Register/Profile';
 
 
 export default class App extends Component {
@@ -32,8 +33,9 @@ export default class App extends Component {
         <UserProvider value={this.state}>
           <Router>
             <Switch>
-              <Route exact path="/register" component={Register} />
-              <Route exact path='/home' component={Nodepop} />
+              <Route exact path="/register" component={ Register } />
+              <Route exact path="/profile" component={ Profile } />
+              <Route exact path='/home' component={ Nodepop } />
 
               <Route component={Register} />
             </Switch>

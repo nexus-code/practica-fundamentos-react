@@ -20,7 +20,7 @@ export default class Nodepop extends React.Component {
     }
 
     handleClickProfileButton(event){
-        this.props.history.push('/register');
+        this.props.history.push('/profile');
     }
 
     render() {

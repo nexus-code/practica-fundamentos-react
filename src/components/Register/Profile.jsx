@@ -3,10 +3,10 @@ import { Form, Button } from 'react-bootstrap';
 import { UserContext, UserConsumer } from '../../context/UserContext'
 import { setUserLS } from '../../utils/localStorage';
 
-export default class Register extends React.Component { 
+export default class Profile extends React.Component { 
 
     /* 
-    Define user & save on local storage
+    Change user data & save on local storage
     */
 
 
@@ -67,6 +67,8 @@ export default class Register extends React.Component {
 
     render (){
         
+        const {name, surname, tags} = this.context.user;
+
         return (
 
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
@@ -74,15 +76,15 @@ export default class Register extends React.Component {
                 <Form onSubmit = { this.handleSubmit }>
                     <Form.Group controlId="formGroupname" >
                         <Form.Label>Name</Form.Label>
-                        <Form.Control name="name" placeholder="Enter name" onChange={ this.handleChange } />
+                        <Form.Control name="name" placeholder="Enter name" value={ name } onChange={ this.handleChange } />
                     </Form.Group>
                     <Form.Group controlId="formGroupsurname" >
                         <Form.Label>Surname</Form.Label>
-                        <Form.Control name="surname" placeholder="surname" onChange={ this.handleChange } />
+                        <Form.Control name="surname" placeholder="surname" value={ surname } onChange={ this.handleChange } />
                     </Form.Group>
                     <Form.Group controlId="formGrouptags" >
                         <Form.Label>Tags</Form.Label>
-                        <Form.Control name="tags" placeholder="tags" onChange={ this.handleChange } />
+                        <Form.Control name="tags" placeholder="tags" value={ tags } onChange={ this.handleChange } />
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
@@ -94,4 +96,4 @@ export default class Register extends React.Component {
     }
 }
 
-Register.contextType = UserContext;
+Profile.contextType = UserContext;
