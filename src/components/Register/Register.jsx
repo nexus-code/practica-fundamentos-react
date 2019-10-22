@@ -1,7 +1,10 @@
 import React from "react";
 import { Form, Button } from 'react-bootstrap';
-import { UserContext, UserConsumer } from '../../context/UserContext'
+import { UserContext } from '../../context/UserContext'
 import { setUserLS } from '../../utils/localStorage';
+import * as API from '../../services/Nodepop';
+import TagSelect from '../TagsSelect/TagSelect'
+
 
 export default class Register extends React.Component { 
 
@@ -82,7 +85,8 @@ export default class Register extends React.Component {
                     </Form.Group>
                     <Form.Group controlId="formGrouptags" >
                         <Form.Label>Tags</Form.Label>
-                        <Form.Control name="tags" placeholder="tags" onChange={ this.handleChange } />
+                        {/* <Form.Control name="tags" placeholder="tags" onChange={ this.handleChange } /> */}
+                        <TagSelect onChange={this.handleChange} />
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
