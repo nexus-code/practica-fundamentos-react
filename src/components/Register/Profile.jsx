@@ -6,7 +6,7 @@ import { setUserLS } from '../../utils/localStorage';
 export default class Profile extends React.Component { 
 
     /* 
-    Change user data & save on local storage
+    Generate user data & save on local storage, if not exits
     */
 
 
