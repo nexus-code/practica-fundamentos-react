@@ -10,6 +10,8 @@ export default class Register extends React.Component {
 
     /* 
     Define user & save on local storage
+
+    No funciona recibe el valor del select:  https://stackblitz.com/edit/092019-react-class-event-parent-child?file=index.js
     */
 
 
@@ -23,10 +25,12 @@ export default class Register extends React.Component {
                 name: '',
                 surname: '',
                 tags: ''
-            }
+            },
+            selectTag: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -34,9 +38,6 @@ export default class Register extends React.Component {
 
         const { name, value } = event.target;
         
-        console.log('event', event);
-
-
         this.setState(({ user }) => ({
             user: {
                 ...user,
@@ -46,12 +47,21 @@ export default class Register extends React.Component {
 
     }
 
+    handleSelectChange(value) {
+
+        console.log('handleSelectChange', value);
+
+    }
+
+
     handleSubmit(event) {
         event.preventDefault();
 
-        console.log('this.context onSubmit', this.context);
-        console.log('this.state onSubmit', this.state);
+        // console.log('this.context onSubmit', this.context);
+        // console.log('this.state onSubmit', this.state);
 
+        // console.log(TagSelect)
+        // return false;
 
         if (this.state.user.name.trim().length <= 3) {
             alert("The name must be bigger than 3 characters");
@@ -62,8 +72,6 @@ export default class Register extends React.Component {
             alert("The surname must be bigger than 3 characters");
             return;
         }
-
-        // Tags pending
 
         setUserLS(this.state.user);
 
@@ -88,7 +96,7 @@ export default class Register extends React.Component {
                     </Form.Group>
                     <Form.Group controlId="formGrouptags" >
                         <Form.Label>Tags</Form.Label>
-                        <TagSelect handleChange={this.handleChange} />
+                        <TagSelect onChange={ this.handleSelectChange } />
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
