@@ -17,9 +17,8 @@ const API_URL = 'http://localhost:3001/apiv1/';
 const getRequest = (url) => {
     return fetch(url,
         { method: "GET" },
-        {
-            Accept: "application/json, text/plain, */*"
-        }
+        { Accept: "application/json, text/plain, */*" },
+        { mode: "cors" }
     )
     .then(res => res.json());
 }
@@ -27,7 +26,7 @@ const getRequest = (url) => {
 const getTagsList = () => {
     // [] of tags (strings)
     return getRequest(`${API_URL}tags`)
-        .then(res => res.results) 
+        .then(res => res.results);
 }
 
 const getAdList = () => {

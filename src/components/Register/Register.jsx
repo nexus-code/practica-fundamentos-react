@@ -34,6 +34,9 @@ export default class Register extends React.Component {
 
         const { name, value } = event.target;
         
+        console.log('event', event);
+
+
         this.setState(({ user }) => ({
             user: {
                 ...user,
@@ -85,8 +88,7 @@ export default class Register extends React.Component {
                     </Form.Group>
                     <Form.Group controlId="formGrouptags" >
                         <Form.Label>Tags</Form.Label>
-                        {/* <Form.Control name="tags" placeholder="tags" onChange={ this.handleChange } /> */}
-                        <TagSelect onChange={this.handleChange} />
+                        <TagSelect handleChange={this.handleChange} />
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
