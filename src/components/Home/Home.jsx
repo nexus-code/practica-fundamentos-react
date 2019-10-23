@@ -14,11 +14,11 @@ export default class Home extends React.Component {
             ads: []
         }
 
-        this.getAdList();
+        this.searchAds();
     }
 
-    getAdList = () => {
-        API.getAdList().then(ads => {
+    searchAds = () => {
+        API.searchAds().then(ads => {
             this.setState({
                 ads
             })
@@ -31,7 +31,7 @@ export default class Home extends React.Component {
         if (query && query.trim().length) {
             API.searchAds(query).then(ads => this.setState({ ads }))
         } else {
-            this.getAdList();
+            this.searchAds();
         }
     };
 

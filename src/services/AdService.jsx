@@ -29,11 +29,6 @@ const getTagsList = () => {
         .then(res => res.results);
 }
 
-const getAdList = () => {
-    return getRequest(`${API_URL}anuncios`)
-        .then(res => res.results.map(ad => new AdModel(ad))) // ad []
-}
-
 const getAdDetail = (adID) => {
     return getRequest(`${API_URL}anuncios/${adID}`)
         .then(res => {
@@ -46,13 +41,15 @@ const getAdDetail = (adID) => {
 }
 
 const searchAds = (query) => {
-    return getRequest(`${API_URL}anuncios/?query=${query}`)
+    
+    const url = query === '' ? `${API_URL}anuncios` : `${API_URL}anuncios/?${query}`;
+    
+    return getRequest(url)
         .then(res => res.results.map(ad => new AdModel(ad)))
 }
 
 export {
     getTagsList,
     searchAds,
-    getAdList,
     getAdDetail
 };
