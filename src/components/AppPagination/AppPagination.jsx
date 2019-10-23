@@ -10,10 +10,13 @@ class AppPagination extends React.Component {
    
     render() {
 
-        const pages  = this.props;
-        const active = this.props.match.params.page;
+        // const page   = this.props.page;
+        const pages  = this.props.pages;
 
-        // let active = 2;
+        if ( pages == 0 ) return(<></>);
+         
+
+        let active = this.props.page;
         let items = [];
         for (let number = 1; number <= pages; number++) {
             items.push(
@@ -25,14 +28,10 @@ class AppPagination extends React.Component {
 
         return (
 
-            <div className='container text-center'>
-                <Pagination>{ items }</Pagination>
+            <div className='container'>
                 <br />
-
                 <Pagination size="lg">{ items }</Pagination>
                 <br />
-
-                <Pagination size="sm">{ items }</Pagination>
             </div>
         )
     }

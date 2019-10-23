@@ -21,7 +21,6 @@ class AdDetail extends React.Component {
                 
                 this.setState({ ad });
             }
-
         });
     }
 
