@@ -5,11 +5,11 @@ export default class AdList extends React.Component {
 
     buildMovieList = (ads) => {
         return (
-            <div className="row">
+            <>
                 {
                     ads.map(ad => <Ad ad={ ad } key={ ad.id } />)
                 }
-            </div>
+            </>
         )
     };
 
@@ -17,22 +17,24 @@ export default class AdList extends React.Component {
         const { ads } = this.props;
         
         return (
-            <div className="mt-3">
-                {
-                    ads
-                    &&
-                    ads.length
-                    &&
-                    this.buildMovieList(ads)
-                }
+            <div className='container mt-5 mb-5'>
+                <div className='card-columns'>
+                    {
+                        ads
+                        &&
+                        ads.length
+                        &&
+                        this.buildMovieList(ads)
+                    }
 
-                {
-                    !ads
-                    &&
-                    <div className="text-center mt-5">
-                        <h2>No advertisements found</h2>
-                    </div>
-                }
+                    {
+                        !ads
+                        &&
+                        <div className='text-center mt-5'>
+                            <h2>No advertisements found</h2>
+                        </div>
+                    }
+                </div>
             </div>
         );
     }

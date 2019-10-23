@@ -3,11 +3,11 @@ import { UserProvider } from './context/UserContext';
 import ErrorBoundary from '../src/ErrorBoundary/ErrorBoundary';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Home     from './components/Home/Home';
-import Register from './components/Register/Register';
-import Profile  from './components/Register/Profile';
-import AdDetail from './components/AdDetail/AdDetail'
-import NotFoundPage from './components/404/NotFoundPage'
+import Home      from './components/Home/Home';
+import Register  from './components/Register/Register';
+import Profile   from './components/Register/Profile'; 
+import AdDetail  from './components/AdDetail/AdDetail';
+import NotFoundPage from './components/404/NotFoundPage';
 
 
 export default class App extends React.Component {

@@ -13,12 +13,10 @@ export const setUserLS = user => {
 };
 
 export const getUserLS = () => {
-//export const restoreUser = () => {
 	const user = localStorage.getItem('data');
   return JSON.parse(user)
 };
 
-// export const deleteStorage = () => {
 export const clearLocalStorage = () => {
   localStorage.clear();
 }

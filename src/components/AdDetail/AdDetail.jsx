@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-
+import React           from "react";
+import { withRouter }  from "react-router-dom";
+import Spinner         from 'react-bootstrap/Spinner'
+import AppNavbar       from '../AppNavbar/AppNavbar';
 import { getAdDetail } from '../../services/AdService';
 
-class AdDetail extends Component {
+class AdDetail extends React.Component {
     constructor(props) {
         super(props);
 
@@ -28,24 +29,29 @@ class AdDetail extends Component {
         const { ad } = this.state;
 
         return (
-            <div className="container">
-                {
-                    ad
-                    &&
-                    <div>
-                        <img src={ad.photo} alt={ad.name} />
+            <>
+                <AppNavbar />
+                <div className="container">
+                    {
+                        ad
+                        &&
+                        <div>
+                            <img src={ad.photo} alt={ad.name} />
 
-                        <h1>{ ad.name }</h1>
-                        <p>{ ad.description }</p>
-                    </div>
-                }
+                            <h1>{ ad.name }</h1>
+                            <p>{ ad.description }</p>
+                        </div>
+                    }
 
-                {
-                    !ad
-                    &&
-                    <h1>Loading...</h1>
-                }
-            </div>
+                    {
+                        !ad
+                        &&
+                        <Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>
+                    }
+                </div>
+            </>
         );
     }
 }

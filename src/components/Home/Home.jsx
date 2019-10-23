@@ -1,8 +1,10 @@
-import React from "react";
-//import { UserContext } from '../../context/UserContext'
+import React     from "react";
+import AppNavbar from '../AppNavbar/AppNavbar';
+
+// import { UserContext } from '../../context/UserContext'
 // import { setUserLS } from '../../utils/localStorage';
-import * as API from '../../services/AdService';
-import AdList from '../AdList/AdList';
+import * as API      from '../../services/AdService';
+import AdList        from '../AdList/AdList';
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -38,7 +40,7 @@ export default class Home extends React.Component {
 
         return (
             <>
-                <input className="form-control" type="text" onKeyUp={ this.search } />
+                <AppNavbar />
 
                 {
                     ads
@@ -47,7 +49,6 @@ export default class Home extends React.Component {
                     &&
                     <AdList ads={ ads } />
                 }
-
             </>
         );
     }
