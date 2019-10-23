@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { UserProvider } from './context/UserContext'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import Home     from './components/Home/Home';
 import Register from './components/Register/Register';
-import Nodepop from './components/Nodepop/Nodepop';
-import Profile from './components/Register/Profile';
+import Profile  from './components/Register/Profile';
+import AdDetail from './components/AdDetail/AdDetail'
+import NotFoundPage from './components/404/NotFoundPage'
 
 
-export default class App extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,14 +22,11 @@ export default class App extends Component {
 
   updateUser(user) {
     
-    console.log('App.updateUser');
     this.setState({ user });
-    console.log('App this.state', this.state);
-
   }
 
   render() {
-    console.log('init', this.state);
+    
     return (
       <div>
         <UserProvider value={this.state}>
@@ -35,7 +34,10 @@ export default class App extends Component {
             <Switch>
               <Route exact path="/register" component={ Register } />
               <Route exact path="/profile" component={ Profile } />
-              <Route exact path='/home' component={ Nodepop } />
+              <Route path='/detail/:id' component={ AdDetail } />
+              <Route exact path='/home' component={ Home } />
+              <Route exact path='/' component={ Home } />
+              <Route path='*' component={ NotFoundPage } />
 
               <Route component={Register} />
             </Switch>

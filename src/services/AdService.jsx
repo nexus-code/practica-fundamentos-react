@@ -1,4 +1,4 @@
-import Ad from '../models/Ad';
+import AdModel from '../models/AdModel';
 
 const API_URL = 'http://localhost:3001/apiv1/';
 
@@ -31,23 +31,23 @@ const getTagsList = () => {
 
 const getAdList = () => {
     return getRequest(`${API_URL}anuncios`)
-        .then(res => res.results.map(ad => new Ad(ad))) // tipea el resultado de la API según el modelo
+        .then(res => res.results.map(ad => new AdModel(ad))) // ad []
 }
 
 const getAdDetail = (adID) => {
     return getRequest(`${API_URL}anuncios/${adID}`)
         .then(res => {
-            if (res.status_code) {
+            if (!res.success) {
                 return res;
             } else {
-                return new Ad(res.result);
+                return new AdModel(res.result);
             }
         })
 }
 
 const searchAds = (query) => {
     return getRequest(`${API_URL}anuncios/?query=${query}`)
-        .then(res => res.results.map(ad => new Ad(ad)))
+        .then(res => res.results.map(ad => new AdModel(ad)))
 }
 
 export {

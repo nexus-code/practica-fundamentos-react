@@ -1,14 +1,15 @@
 import React from 'react';
 import Select from 'react-select';
-import * as API from '../../services/Nodepop';
+import * as API from '../../services/AdService';
 
 export default class TagSelect extends React.Component {
 
 /*
     No funciona enviar el valor del select a register:  https://stackblitz.com/edit/092019-react-class-event-parent-child?file=index.js
     https://medium.com/@kyledavelaar/updating-parent-component-state-from-children-components-in-react-2ead9b9cec9f
+    https://ourcodeworld.com/articles/read/409/how-to-update-parent-state-from-child-component-in-react
 
-    Git tiene actualizado hasta los cambios para comunicar hijo->padre
+    https://react-select.com/home || https://blog.logrocket.com/getting-started-with-react-select/
 */
 
     constructor(props) {
@@ -41,7 +42,6 @@ export default class TagSelect extends React.Component {
             //() => this.props.selectTag(this.state.selectedOption)
         )
     };
-
 
     handleSelectChange(event) {
         this.props.handleSelectChange(event.target.value);
