@@ -13,14 +13,18 @@ class AppPagination extends React.Component {
         // const page   = this.props.page;
         const pages  = this.props.pages;
 
-        if ( pages == 0 ) return(<></>);
+        if ( pages === 0 ) return(<></>);
          
+        
+        
+        const currentPage = this.props.currentpage;
+        console.log('currentPage', currentPage);
+        console.log('pages', pages);
 
-        let active = this.props.page;
         let items = [];
         for (let number = 1; number <= pages; number++) {
             items.push(
-                <Pagination.Item key={number} active={number === active}>
+                <Pagination.Item key={number} active={ number === currentPage }>
                     {number}
                 </Pagination.Item>,
             );
@@ -30,7 +34,13 @@ class AppPagination extends React.Component {
 
             <div className='container'>
                 <br />
-                <Pagination size="lg">{ items }</Pagination>
+                 <Pagination size="lg">
+                    <Pagination.First disabled={ currentPage === 1 } />
+                    <Pagination.Prev disabled={ currentPage === 1 }/>
+                    { items }
+                    <Pagination.Next />
+                    <Pagination.Last />
+                </Pagination>
                 <br />
             </div>
         )

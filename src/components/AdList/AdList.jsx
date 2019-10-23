@@ -31,8 +31,11 @@ class AdList extends React.Component {
         const itemsPerPage = 3; // !! A config o similar
 
         const pages = ads.length > itemsPerPage ? Math.floor(ads.length/itemsPerPage) : 0;
-        const page = this.props.match.params.page === 'undefined' ? 0 : this.props.match.params.page;
-        ads = ads.slice (page, itemsPerPage);
+        console.log('this.props.match.params', this.props.match.params);
+
+        const currentPage = this.props.match.params.page === 'undefined' ? 1 : this.props.match.params.page;
+        ads = ads.slice(currentPage, itemsPerPage);
+        console.log('currentPage L', currentPage);
 
         return (
             <div className='container mt-5 mb-5'>
@@ -54,7 +57,7 @@ class AdList extends React.Component {
                     }
                 </div>
                 <div>
-                    <AppPagination page={ page } pages={ pages } /> 
+                    <AppPagination currentpage={ currentPage } pages={ pages } /> 
                 </div>
             </div>
         );
