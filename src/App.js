@@ -1,5 +1,6 @@
 import React from 'react';
-import { UserProvider } from './context/UserContext'
+import { UserProvider } from './context/UserContext';
+import ErrorBoundary from '../src/ErrorBoundary/ErrorBoundary';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Home     from './components/Home/Home';
@@ -30,18 +31,20 @@ export default class App extends React.Component {
     return (
       <div>
         <UserProvider value={this.state}>
-          <Router>
-            <Switch>
-              <Route exact path="/register" component={ Register } />
-              <Route exact path="/profile" component={ Profile } />
-              <Route path='/detail/:id' component={ AdDetail } />
-              <Route exact path='/home' component={ Home } />
-              <Route exact path='/' component={ Home } />
-              <Route path='*' component={ NotFoundPage } />
+          <ErrorBoundary>
+              <Router>
+                <Switch>
+                  <Route exact path="/register" component={ Register } />
+                  <Route exact path="/profile" component={ Profile } />
+                  <Route path='/detail/:id' component={ AdDetail } />
+                  <Route exact path='/home' component={ Home } />
+                  <Route exact path='/' component={ Home } />
+                  <Route path='*' component={ NotFoundPage } />
 
-              <Route component={Register} />
-            </Switch>
-          </Router>
+                  <Route component={Register} />
+                </Switch>
+              </Router>
+          </ErrorBoundary>
         </UserProvider>
       </div>
     );

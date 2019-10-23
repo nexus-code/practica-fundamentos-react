@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
-// import Ad        from "../Ad/Ad";
 import { getAdDetail } from '../../services/AdService';
 
 class AdDetail extends Component {
