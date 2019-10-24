@@ -19,6 +19,7 @@ class AppNavbar extends React.Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/profile">My profile</Nav.Link>
+                        <Nav.Link href="/advert/create">New advert</Nav.Link>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />

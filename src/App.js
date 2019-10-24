@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home      from './components/Home/Home';
 import Register  from './components/Register/Register';
 import Profile   from './components/Register/Profile'; 
+import AdEdit    from './components/AdEdit/AdEdit';
 import AdDetail  from './components/AdDetail/AdDetail';
 import NotFoundPage from './components/404/NotFoundPage';
 
@@ -37,7 +38,8 @@ export default class App extends React.Component {
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/profile" component={ Profile } />
                   <Route path='/advert/:id' component={ AdDetail } />
-                  {/* <Route path='/advert/edit/:id' component={ Advert } /> */}
+                  <Route path='/advert/edit/:id' component={ AdEdit } />
+                  <Route path='/advert/create' component={ AdEdit } />
                   <Route exact path='/home' component={ Home } />
                   <Route exact path='/' component={ Home } />
                   <Route path='*' component={ NotFoundPage } />

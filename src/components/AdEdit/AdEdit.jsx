@@ -1,10 +1,11 @@
 import React from "react";
+import { withRouter }   from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
-import { UserContext } from '../../context/UserContext'
-import { setUserLS } from '../../utils/localStorage';
+import { UserContext }  from '../../context/UserContext'
+import { setUserLS }    from '../../utils/localStorage';
 //import * as API from '../../services/NodepopService';
 
-export default class Advert extends React.Component { 
+class AdEdit extends React.Component { 
 
 
         /* Se ha tomado REGISTER como patrón */
@@ -68,27 +69,37 @@ export default class Advert extends React.Component {
         return (
 
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
-                <h2>Wellcome to WallaKeep</h2>
+                <h2>Create / edit advertisement</h2>
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="formGroupname" >
+                    <Form.Group controlId="formGroupName" >
                         <Form.Label>Name</Form.Label>
                         <Form.Control name="name" placeholder="Product name" onChange={this.handleChange} />
                     </Form.Group>
-                    <Form.Group controlId="formGroupprice" >
+                    <Form.Group controlId="formGroupPrice" >
                         <Form.Label>Price</Form.Label>
                         <Form.Control name="price" placeholder="price" onChange={this.handleChange} />
                     </Form.Group>
-                    <Form.Group controlId="formGrouptype" >
-                        <Form.Label>Type</Form.Label>
-                        <Form.Control name="type" placeholder="type" onChange={this.handleChange} />
+                    <Form.Group controlId="formGroupType" >
+                        {['sell', 'buy'].map(type => (
+                            <div key={type} className="mb-3">
+                                <Form.Check type='radio' id={`check-api-${type}`}>
+                                    <Form.Check.Input type='radio' isValid />
+                                    <Form.Check.Label>{` ${type}`}</Form.Check.Label>
+                                </Form.Check>
+                            </div>
+                        ))}
                     </Form.Group>
-                    <Form.Group controlId="formGrouptags" >
+                    <Form.Group controlId="formGroupDescription">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control name="description" as="textarea" rows="3" />
+                    </Form.Group>
+                    {/* <Form.Group controlId="formGrouptags" >
                         <Form.Label>Tags</Form.Label>
                         <TagSelect onChange={this.handleSelectChange} />
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Button variant="primary" type="submit">
-                        Access
+                        Save
                     </Button>
                 </Form>
             </div>
@@ -96,4 +107,8 @@ export default class Advert extends React.Component {
     }
 }
 
-Advert.contextType = UserContext;
+
+
+AdEdit.contextType = UserContext;
+
+export default withRouter(AdEdit);
