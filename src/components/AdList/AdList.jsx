@@ -1,10 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from "react-router-dom";
 import Ad from '../Ad/Ad'
 import AppPagination from '../AppPagination/AppPagination'
 
 class AdList extends React.Component {
-
 
     buildMovieList = (ads) => {
         return (
@@ -31,20 +31,27 @@ class AdList extends React.Component {
         return parseInt(currentPage);
     }
 
+    componentWillMount(){
+        // pending
+
+        // if (currentPage > pages){
+        //     this.props.history.push(`/home?page=${pages}`);
+        // }        
+    }
+
     render() {
         let { ads } = this.props;
         const itemsPerPage = 3; // !! To config or similar
             
-        const currentPage = this.getCurrentPage(ads.length);
-        const startIndex = (currentPage - 1) * itemsPerPage;    // first index on [ads] to show in this page
+        // pagination
         const pages = Math.ceil(ads.length / itemsPerPage);
+        const currentPage = this.getCurrentPage(ads.length);
 
-        // console.log('currentPage:', currentPage);
-        // console.log('startIndex:', startIndex);
-        // console.log('itemsPerPage:', itemsPerPage);
 
-        ads = ads.slice(startIndex, startIndex + itemsPerPage);
+        const startIndex = (currentPage - 1) * itemsPerPage;    // first index on [ads] to show in this page
 
+        ads = ads.slice(startIndex, startIndex + itemsPerPage); // Optimize on API call
+        
         return (
             <div className='container mt-5 mb-5'>
                 <div className='card-columns'>
@@ -65,11 +72,18 @@ class AdList extends React.Component {
                     }
                 </div>
                 <div>
+                    <br/>
+                    <hr/>
+                    <br/>
                     <AppPagination currentPage={ currentPage } pages={ pages } /> 
                 </div>
             </div>
         );
     }
+}
+
+AdList.propTypes = {
+    ads: PropTypes.array.isRequired
 }
 
 export default withRouter(AdList);

@@ -100,5 +100,4 @@ AppPagination.propTypes = {
     currentPage: PropTypes.number.isRequired
 }
 
-
 export default withRouter(AppPagination);

@@ -6,8 +6,7 @@ class Ad extends React.Component {
     
     goToDetail = () => {
 
-
-        this.props.history.push(`/detail/${this.props.ad.id}`);
+        this.props.history.push(`/advert/${this.props.ad.id}`);
     };
 
     render() {
@@ -34,7 +33,7 @@ class Ad extends React.Component {
                             { ad.name }
                         </h5>
                         <p className='card-text'>{ ad.description }</p>
-                        <p className='card-text'>{ ad.price } €</p>                
+                        <h2 className='text-center'><span className='badge badge-primary'>{ ad.price } €</span></h2>                
                     </div>
                 </div>
         );

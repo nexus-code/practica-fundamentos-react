@@ -1,6 +1,6 @@
 import React           from "react";
 import { withRouter }  from "react-router-dom";
-import Spinner         from 'react-bootstrap/Spinner'
+import { Button, Spinner } from 'react-bootstrap'
 import AppNavbar       from '../AppNavbar/AppNavbar';
 import { getAdDetail } from '../../services/AdService';
 
@@ -11,6 +11,7 @@ class AdDetail extends React.Component {
         this.state = {};
 
         const AdID = this.props.match.params.id;
+        this.goBack = this.goBack.bind(this);
 
         getAdDetail(AdID).then(ad => {
             
@@ -22,6 +23,11 @@ class AdDetail extends React.Component {
                 this.setState({ ad });
             }
         });
+    }
+
+    goBack(){
+
+        this.props.history.goBack();
     }
 
     render() {
@@ -37,8 +43,20 @@ class AdDetail extends React.Component {
                         <div>
                             <img src={ad.photo} alt={ad.name} />
 
-                            <h1>{ ad.name }</h1>
+                            <h1 style={{
+                                color: ad.type = 'sell' ? 'green' : 'blue'
+                                }}>{ ad.name } <span className='badge badge-primary'>{ad.price}€</span>
+                            </h1>
                             <p>{ ad.description }</p>
+                            <p>
+                                {
+                                    ad.tags.map(tag => `${tag} | `)
+                                }
+                            </p>
+                            <br />
+                            <hr />
+                            <br />
+                            <Button className='btn btn-dark' onClick= { this.goBack} >Go back</Button>
                         </div>
                     }
 
