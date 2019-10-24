@@ -14,62 +14,58 @@ class AppPagination extends React.Component {
         this.state = {
             pages: parseInt(this.props.pages),
             currentPage: parseInt(this.props.currentPage)
-            // pages: this.props.pages,
-            // currentPage: this.props.currentPag
         };
 
-        this.pageChanged = this.pageChanged.bind(this);
+        // <<, <, > y >> cuases undefined. find out why?
+        this.pageChanged  = this.pageChanged.bind(this);
+        this.gotoFirst    = this.gotoFirst.bind(this);
+        this.gotoPrevious = this.gotoPrevious.bind(this);
+        this.gotoNext     = this.gotoNext.bind(this);
+        this.gotoLast     = this.gotoLast.bind(this);
     }
 
+    goTo(index){
+
+        this.setState({ pages: this.state.pages, currentPage: index });
+        this.props.history.push(`/home?page=${index}`);
+    } 
+
     gotoFirst(){
-        console.log('first!!');
+
+        this.goTo(1);
+    }
+
+    gotoPrevious() {
+
+        const { currentPage } = this.state;
+        const index = currentPage === 1 ? 1 : currentPage - 1;
+        this.goTo(index);
+    }
+
+    gotoNext() {
+
+        const { pages, currentPage } = this.state;
+        const index = currentPage === pages ? pages : currentPage + 1;
+        this.goTo(index);        
     }
 
     gotoLast() {
-        console.log('last');
+        
+        this.goTo(this.state.pages);
     }
 
+
     pageChanged(event) {
-        console.log(event.target.text);
-        console.log(event.target.text + '/' + this.state.currentPage);
-        const { pages, currentPage } = this.state;
-
-        let goto = 0;
-
-        switch (event.target.text) {
-            case '«First':
-                goto = 1;                
-                break;
-            case '‹Previous':
-                goto = currentPage === 1 ? 1 : currentPage - 1;
-                break;
-            case '›Next':
-                goto = currentPage === pages ? pages : currentPage + 1;
-                break;
-            case '»Last':
-                goto = pages;
-                break;
-
-            default:
-                goto = parseInt(event.target.text);
-                break;
-        }
-
-        console.log('goto', goto);
-
-    //    this.props.history.push(`/home?page=${event.target.text}`);
-        this.props.history.push(`/home?page=${goto}`);
+        
+        this.goTo(parseInt(event.target.text));
     }
    
     render() {
 
         const { pages, currentPage } = this.state;
 
-        if ( pages === 0 ) return(<></>);
+        if ( pages === 0 ) return(<></>);   //end if not pages specificated
          
-        
-        // const currentPage = parseInt(this.props.currentPage);
-        console.log('currentPage:', currentPage);
 
         let items = [];
         for (let number = 1; number <= pages; number++) {
@@ -85,11 +81,11 @@ class AppPagination extends React.Component {
             <div className='container'>
                 <br />
                 <Pagination size="lg">
-                    <Pagination.First disabled={currentPage === 1} onClick={this.gotoFirst}/>
-                    <Pagination.Prev disabled={ currentPage === 1 } />
+                    <Pagination.First disabled={currentPage === 1} onClick={ this.gotoFirst }/>
+                    <Pagination.Prev disabled={ currentPage === 1 } onClick={ this.gotoPrevious } />
                     { items }
-                    <Pagination.Next disabled={ currentPage === pages } />
-                    <Pagination.Last disabled={ currentPage === pages } />
+                    <Pagination.Next disabled={ currentPage === pages }  onClick={ this.gotoNext } />
+                    <Pagination.Last disabled={ currentPage === pages } onClick={ this.gotoLast } />
                 </Pagination>
                 <br />
             </div>
