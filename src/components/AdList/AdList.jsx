@@ -34,8 +34,8 @@ class AdList extends React.Component {
             currentPage = urlSearch.substring(urlSearch.indexOf('page=') + 'page='.length, urlSearch.length);
         
 
-        // return (urlSearch.length > 0 && urlSearch.indexOf('page') > 0) ? urlSearch.substring(urlSearch.indexOf('page') + 'page'.length, urlSearch.length) : 1
-        return currentPage;
+        // return (urlSearch.length > 0 && urlSearch.indexOf('page') > 0) ? parseInt(urlSearch.substring(urlSearch.indexOf('page') + 'page'.length, urlSearch.length)) : 1
+        return parseInt(currentPage);
     }
 
     render() {

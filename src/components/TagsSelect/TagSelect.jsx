@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Select from 'react-select';
 import * as API from '../../services/AdService';
 
@@ -42,7 +43,6 @@ export default class TagSelect extends React.Component {
         this.props.onChange(selectedOption.value);  // save value on parent
     };
 
-
     
     render() {
 
@@ -57,4 +57,10 @@ export default class TagSelect extends React.Component {
             />
         );
     }
+}
+
+TagSelect.propTypes = {
+    value: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    options: PropTypes.array.isRequired
 }

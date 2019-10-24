@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom'
 import { Pagination } from 'react-bootstrap';
 
@@ -93,5 +94,11 @@ class AppPagination extends React.Component {
     }
 
 };
+
+AppPagination.propTypes = {
+    pages: PropTypes.number.isRequired, 
+    currentPage: PropTypes.number.isRequired
+}
+
 
 export default withRouter(AppPagination);
