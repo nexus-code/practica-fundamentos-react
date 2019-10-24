@@ -4,14 +4,7 @@ import Ad from '../Ad/Ad'
 import AppPagination from '../AppPagination/AppPagination'
 
 class AdList extends React.Component {
-    // constructor(props) {
-    //     super(props);
 
-    //     this.state = {};
-
-    // }
-
-    // const page = this.props.match.params.page;
 
     buildMovieList = (ads) => {
         return (
