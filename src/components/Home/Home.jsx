@@ -2,7 +2,7 @@ import React     from "react";
 import AppNavbar from '../AppNavbar/AppNavbar';
 
 // import { UserContext } from '../../context/UserContext'
-// import { setUserLS } from '../../utils/localStorage';
+import { getUserLS } from '../../utils/localStorage';
 import * as API      from '../../services/AdService';
 import AdList        from '../AdList/AdList';
 
@@ -11,14 +11,18 @@ export default class Home extends React.Component {
         super(props);
 
         this.state = {
-            ads: []
+            ads: [],
+            user: getUserLS()
         }
 
         this.searchAds();
     }
 
     searchAds = () => {
-        API.searchAds().then(ads => {
+
+        //Register tag is used to default search
+
+        API.searchAds(`tag=${this.state.user.tags}`).then(ads => {
             this.setState({
                 ads
             })
@@ -26,6 +30,7 @@ export default class Home extends React.Component {
     }
 
     search = (e) => {
+        // close down search
         const query = e.target.value;
 
         if (query && query.trim().length) {
