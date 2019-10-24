@@ -41,8 +41,34 @@ const searchAds = (query) => {
         .then(res => res.results.map(ad => new AdModel(ad)))
 }
 
+const createAd = (ad) => {
+    return fetch(`${API_URL}anuncios`, {
+            method: 'POST',
+        body: JSON.stringify(ad), // data can be `string` or {object}!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response));
+}
+
+const updateAd = (ad) => {
+    return fetch(`${API_URL}anuncios`, {
+        method: 'PUT',
+        body: JSON.stringify(ad), // data can be `string` or {object}!
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
+}
+
 export {
     getTagsList,
     searchAds,
-    getAdDetail
+    getAdDetail,
+    createAd,
+    updateAd
 };

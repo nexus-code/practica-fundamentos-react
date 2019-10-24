@@ -55,12 +55,15 @@ export default class Register extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        if (this.state.user.name.trim().length <= 3) {
+        const { name, surname } = this.state;
+
+
+        if (name.trim().length <= 3) {
             alert("The name must be bigger than 3 characters");
             return;
         }
 
-        if (this.state.user.surname.trim().length <= 3) {
+        if (surname.trim().length <= 3) {
             alert("The surname must be bigger than 3 characters");
             return;
         }
