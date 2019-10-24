@@ -4,12 +4,12 @@ import Ad from '../Ad/Ad'
 import AppPagination from '../AppPagination/AppPagination'
 
 class AdList extends React.Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-        this.state = {};
+    //     this.state = {};
 
-    }
+    // }
 
     // const page = this.props.match.params.page;
 
@@ -23,19 +23,34 @@ class AdList extends React.Component {
         )
     };
 
+    
+    getCurrentPage(length, step) {
+    // return current page from url. 1 by default
+        
+        const urlSearch = this.props.history.location.search;
+        let currentPage = 1;
+        
+        if (urlSearch.length > 0 && urlSearch.indexOf('page') > 0)
+            currentPage = urlSearch.substring(urlSearch.indexOf('page=') + 'page='.length, urlSearch.length);
+        
+
+        // return (urlSearch.length > 0 && urlSearch.indexOf('page') > 0) ? urlSearch.substring(urlSearch.indexOf('page') + 'page'.length, urlSearch.length) : 1
+        return currentPage;
+    }
+
     render() {
         let { ads } = this.props;
+        const itemsPerPage = 3; // !! To config or similar
+            
+        const currentPage = this.getCurrentPage(ads.length);
+        const startIndex = (currentPage - 1) * itemsPerPage;    // first index on [ads] to show in this page
+        const pages = Math.ceil(ads.length / itemsPerPage);
 
-        // console.log('this.props.match.params.page',this.props.match.params.page)
+        // console.log('currentPage:', currentPage);
+        // console.log('startIndex:', startIndex);
+        // console.log('itemsPerPage:', itemsPerPage);
 
-        const itemsPerPage = 3; // !! A config o similar
-
-        const pages = ads.length > itemsPerPage ? Math.floor(ads.length/itemsPerPage) : 0;
-        console.log('this.props.match.params', this.props.match.params);
-
-        const currentPage = this.props.match.params.page === 'undefined' ? 1 : this.props.match.params.page;
-        ads = ads.slice(currentPage, itemsPerPage);
-        console.log('currentPage L', currentPage);
+        ads = ads.slice(startIndex, startIndex + itemsPerPage);
 
         return (
             <div className='container mt-5 mb-5'>
@@ -57,7 +72,7 @@ class AdList extends React.Component {
                     }
                 </div>
                 <div>
-                    <AppPagination currentpage={ currentPage } pages={ pages } /> 
+                    <AppPagination currentPage={ currentPage } pages={ pages } /> 
                 </div>
             </div>
         );

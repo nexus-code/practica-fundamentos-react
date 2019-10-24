@@ -25,8 +25,7 @@ export default class Register extends React.Component {
                 name: '',
                 surname: '',
                 tags: ''
-            },
-            selectTag: ''
+            }
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -48,20 +47,15 @@ export default class Register extends React.Component {
     }
 
     handleSelectChange(value) {
+    // get (child) TagSelect.SelectedOption and save on (parent) Register.
+    // formats selected value to a obj "similar" to 'event' param
 
-        console.log('handleSelectChange', value);
-
+        this.handleChange({target:{name: 'tags', value: value }});
     }
 
 
     handleSubmit(event) {
         event.preventDefault();
-
-        // console.log('this.context onSubmit', this.context);
-        // console.log('this.state onSubmit', this.state);
-
-        // console.log(TagSelect)
-        // return false;
 
         if (this.state.user.name.trim().length <= 3) {
             alert("The name must be bigger than 3 characters");
@@ -72,6 +66,11 @@ export default class Register extends React.Component {
             alert("The surname must be bigger than 3 characters");
             return;
         }
+
+        // console.log('submit', this.state);
+        // console.log('selectedOption', TagSelect.selectedOption);
+        
+        // return false;
 
         setUserLS(this.state.user);
 
@@ -96,7 +95,7 @@ export default class Register extends React.Component {
                     </Form.Group>
                     <Form.Group controlId="formGrouptags" >
                         <Form.Label>Tags</Form.Label>
-                        <TagSelect onChange={ this.handleSelectChange } />
+                        <TagSelect onChange={this.handleSelectChange } />
                     </Form.Group>
 
                     <Button variant="primary" type="submit">

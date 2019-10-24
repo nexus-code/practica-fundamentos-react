@@ -9,7 +9,7 @@ export default class TagSelect extends React.Component {
     https://medium.com/@kyledavelaar/updating-parent-component-state-from-children-components-in-react-2ead9b9cec9f
     https://ourcodeworld.com/articles/read/409/how-to-update-parent-state-from-child-component-in-react
 
-    https://react-select.com/home || https://blog.logrocket.com/getting-started-with-react-select/
+    https://react-select.com/home || - https://blog.logrocket.com/getting-started-with-react-select/
 */
 
     constructor(props) {
@@ -17,9 +17,10 @@ export default class TagSelect extends React.Component {
 
         this.state = {
             tags: [],
-            selectedOption: ''
+            selectedOption: null
         }
 
+        this.handleChange = this.handleChange.bind(this);
         this.getTagsList();
     }
     
@@ -31,35 +32,27 @@ export default class TagSelect extends React.Component {
         );
     }
 
-    state = {
-        selectedOption: null,
-    };
-    
     handleChange = selectedOption => {
+
         this.setState(
             { selectedOption },
-            () => console.log(`Option selected:`, this.state.selectedOption) 
-            //() => this.props.selectTag(this.state.selectedOption)
-        )
+            () => console.log(`TagSelect.selectedOption:`, this.state) 
+        );
+
+        this.props.onChange(selectedOption.value);  // save value on parent
     };
 
-    handleSelectChange(event) {
-        this.props.handleSelectChange(event.target.value);
-        console.log(`Option selected 2:`, event.target.value);
-        this.setState({
-            value: event.target.value
-        });
-    }
+
     
     render() {
 
-        const { selectedOption } = this.state;
+        const { selectedOption } = this.state;  // {value, label}
         const options = this.state.tags.map(tag => { let t = {}; t['value'] = tag; t['label'] = tag; return t });
 
         return (
             <Select
                 value={selectedOption}
-                onChange={this.handleSelectChange}
+                onChange={this.handleChange}
                 options={options}
             />
         );
