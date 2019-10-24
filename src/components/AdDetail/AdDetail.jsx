@@ -8,12 +8,16 @@ class AdDetail extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            AdID: this.props.match.params.id
+        };
 
-        const AdID = this.props.match.params.id;
+        // const AdID = this.props.match.params.id;
+
         this.goBack = this.goBack.bind(this);
+        this.editAdvert = this.editAdvert.bind(this);
 
-        getAdDetail(AdID).then(ad => {
+        getAdDetail(this.state.AdID).then(ad => {
             
             if (ad.hasOwnProperty('success')) {
 
@@ -28,6 +32,11 @@ class AdDetail extends React.Component {
     goBack(){
 
         this.props.history.goBack();
+    }
+
+    editAdvert() {
+
+        this.props.history.push(`../advert/edit/${this.state.AdID}`);
     }
 
     render() {
@@ -50,13 +59,18 @@ class AdDetail extends React.Component {
                             <p>{ ad.description }</p>
                             <p>
                                 {
-                                    ad.tags.map(tag => `${tag} | `)
+                                    ad.tags.map(tag => <span className='badge badge-secondary p-2 mr-2' key={tag}> { tag } </span> )
                                 }
                             </p>
+
+                            {
+
+                            }
                             <br />
                             <hr />
                             <br />
-                            <Button className='btn btn-dark' onClick= { this.goBack} >Go back</Button>
+                            <Button className='btn btn-warning' onClick={this.editAdvert} style={{ float:'right'}} >Edit</Button> 
+                            <Button className='btn btn-dark' onClick={ this.goBack } >Go back</Button>
                         </div>
                     }
 

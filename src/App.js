@@ -37,6 +37,7 @@ export default class App extends React.Component {
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/profile" component={ Profile } />
                   <Route path='/advert/:id' component={ AdDetail } />
+                  {/* <Route path='/advert/edit/:id' component={ Advert } /> */}
                   <Route exact path='/home' component={ Home } />
                   <Route exact path='/' component={ Home } />
                   <Route path='*' component={ NotFoundPage } />

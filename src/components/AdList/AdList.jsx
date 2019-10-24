@@ -31,8 +31,8 @@ class AdList extends React.Component {
         return parseInt(currentPage);
     }
 
-    componentWillMount(){
-        // pending
+    componentDidMount(){
+        // pending: 
 
         // if (currentPage > pages){
         //     this.props.history.push(`/home?page=${pages}`);
@@ -41,7 +41,7 @@ class AdList extends React.Component {
 
     render() {
         let { ads } = this.props;
-        const itemsPerPage = 3; // !! To config or similar
+        const itemsPerPage = 3; // !! pending: to config or register !!
             
         // pagination
         const pages = Math.ceil(ads.length / itemsPerPage);
