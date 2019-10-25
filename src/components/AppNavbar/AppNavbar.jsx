@@ -1,11 +1,21 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types';
 import { Navbar, Button, Form, FormControl, Nav } from 'react-bootstrap';
 
 // + https://react-bootstrap.github.io/components/navbar/
 // - https://medium.com/@leonardellifernando/reactjs-navbar-con-bootstrap-y-react-router-85f8ba82edc1
 
 class AppNavbar extends React.Component {
+
+    // constructor(props) {
+    //     super(props);
+
+    //     this.state = {
+    //         displaySearch = 
+    //     }
+    // }
+
 
     getNavLinkClass = (path) => {
         return this.props.location.pathname === path ? 'active' : '';
@@ -21,7 +31,7 @@ class AppNavbar extends React.Component {
                         <Nav.Link href="/profile">My profile</Nav.Link>
                         <Nav.Link href="/advert/create">New advert</Nav.Link>
                     </Nav>
-                    <Form inline>
+                    <Form inline style={{}}>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                         <Button variant="outline-success">Search</Button>
                     </Form>
@@ -30,5 +40,11 @@ class AppNavbar extends React.Component {
         )
     }
 };
+
+
+AppNavbar.propTypes = {
+    // value: PropTypes.string,
+    displaySearch: PropTypes.bool
+}
 
 export default withRouter(AppNavbar);

@@ -16,7 +16,7 @@ export default class TagSelect extends React.Component {
 
         this.state = {
             tags: [],
-            selectedOption: null
+            selectedOption: null 
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -45,15 +45,40 @@ export default class TagSelect extends React.Component {
     
     render() {
 
+        console.log('props', this.props.value);
+
+        const isMulti = false || this.props.isMulti;
+
         const { selectedOption } = this.state;  // {value, label}
         const options = this.state.tags.map(tag => { let t = {}; t['value'] = tag; t['label'] = tag; return t });
 
         return (
-            <Select
-                value={selectedOption}
-                onChange={this.handleChange}
-                options={options}
-            />
+            <>
+                {
+                    isMulti
+                    &&
+                    <Select
+                        value={selectedOption}
+                        onChange={this.handleChange}
+                        options={options}
+                        isMulti
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                    />
+                }
+
+                {
+                    !isMulti
+                    &&
+                    <Select
+                        value={selectedOption}
+                        onChange={this.handleChange}
+                        options={options}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                    />
+                }
+            </>
         );
     }
 }

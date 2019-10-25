@@ -185,7 +185,7 @@ class AdEdit extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="formGrouptags" >
                             <Form.Label>Tag</Form.Label>
-                            <TagSelect onChange={this.handleChange}  value={ advert.tags } isMulti={true} />
+                            <TagSelect onChange={this.handleChange}  value={{ value: 'work', label: 'work' }} />
                         </Form.Group>
 
                         <Button variant="primary" type="submit" disabled={status}>
