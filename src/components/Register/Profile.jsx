@@ -15,8 +15,6 @@ export default class Profile extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log('init Register props', props);
-
         this.state = {
             user: {
                 name: '',

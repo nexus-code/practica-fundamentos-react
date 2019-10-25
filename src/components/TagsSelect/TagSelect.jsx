@@ -59,6 +59,6 @@ export default class TagSelect extends React.Component {
 }
 
 TagSelect.propTypes = {
-    value: PropTypes.string,
+    // value: PropTypes.string,
     onChange: PropTypes.func.isRequired
 }

@@ -6,7 +6,6 @@ const API_URL = 'http://localhost:3001/apiv1/';
     API: https://github.com/IsmaelB83/keepcoding-backend-node
 */
 
-
 const getRequest = (url) => {
     return fetch(url,
         { method: "GET" },
@@ -41,34 +40,28 @@ const searchAds = (query) => {
         .then(res => res.results.map(ad => new AdModel(ad)))
 }
 
-const createAd = (ad) => {
+const saveAd = (ad, method) => {
     return fetch(`${API_URL}anuncios`, {
-            method: 'POST',
+        method: `${method}`,
         body: JSON.stringify(ad), // data can be `string` or {object}!
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
-}
-
-const updateAd = (ad) => {
-    return fetch(`${API_URL}anuncios`, {
-        method: 'PUT',
-        body: JSON.stringify(ad), // data can be `string` or {object}!
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+        })
+        .then(res => {
+            // the API returns status, but not de advert sent :/
+            if (res.status === 200) {
+                return 'OK';
+            } else {
+                return res;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 export {
     getTagsList,
     searchAds,
     getAdDetail,
-    createAd,
-    updateAd
+    saveAd
 };
