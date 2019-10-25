@@ -5,6 +5,7 @@ import { UserContext }  from '../../context/UserContext'
 // import { setUserLS }    from '../../utils/localStorage';
 import { createAd, updateAd }  from '../../services/AdService';
 import AppNavbar        from '../AppNavbar/AppNavbar';
+import TagSelect        from '../TagsSelect/TagSelect'
 
 
 const TYPES = ['sell', 'buy']
@@ -12,7 +13,7 @@ const TYPES = ['sell', 'buy']
 class AdEdit extends React.Component { 
 
 
-        /* Se ha tomado REGISTER como patrón */
+    // Create & update Ads
 
 
     constructor(props) {
@@ -46,13 +47,13 @@ class AdEdit extends React.Component {
     }   
 
     handleSubmit(event) {
+        
         event.preventDefault();
-        console.log('submit', this.state);
 
+        // console.log('submit', this.state);
+        // return false;
 
-        return false;
-
-        const { name, price, description, type } = this.state;
+        const { name, price, description, type } = this.state.advert;
 
         if (name.trim().length <= 3) {
             alert("The name must be bigger than 3 characters");
@@ -65,6 +66,10 @@ class AdEdit extends React.Component {
         }
 
         console.log('submit', this.state);
+
+        createAd(this.state.advert)
+            .then (console.log('Guardado!!!???'))
+            .catch('Error, lógicamente')
 
 
         return false;
@@ -82,11 +87,15 @@ class AdEdit extends React.Component {
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="formGroupName" >
                             <Form.Label>Name</Form.Label>
-                            <Form.Control name="name" placeholder="Product name" onChange={this.handleChange} />
+                            <Form.Control name="name" placeholder="Product name" onChange={ this.handleChange } />
                         </Form.Group>
                         <Form.Group controlId="formGroupPrice" >
                             <Form.Label>Price</Form.Label>
-                            <Form.Control name="price" placeholder="on €" onChange={this.handleChange} />
+                            <Form.Control name="price" placeholder="on €" onChange={ this.handleChange } type="number" step=".01" />
+                        </Form.Group>
+                        <Form.Group controlId="formGroupPhoto" >
+                            <Form.Label>Photo</Form.Label>
+                            <Form.Control name="photo" placeholder="Select a prety photo" onChange={ this.handleChange } />
                         </Form.Group>
                         <Form.Group controlId="formGroupType" >
                             <Form.Label>Type</Form.Label>
@@ -97,7 +106,7 @@ class AdEdit extends React.Component {
                                             name='type' 
                                             value={`${type}`} 
                                             type='radio' 
-                                            onChange={this.handleChange} 
+                                            onChange={ this.handleChange } 
                                             />
                                         <Form.Check.Label style= {{textTransform:'capitalize'}}>{` ${type}`}</Form.Check.Label>
                                     </Form.Check>
@@ -106,12 +115,12 @@ class AdEdit extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="formGroupDescription">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control name="description" as="textarea" rows="3" onChange={this.handleChange} />
+                            <Form.Control name="description" as="textarea" rows="3" onChange={ this.handleChange } />
                         </Form.Group>
-                        {/* <Form.Group controlId="formGrouptags" >
-                            <Form.Label>Tags</Form.Label>
-                            <TagSelect onChange={this.handleSelectChange} />
-                        </Form.Group> */}
+                        <Form.Group controlId="formGrouptags" >
+                            <Form.Label>Tag</Form.Label>
+                            <TagSelect onChange={ this.handleChange } />
+                        </Form.Group>
 
                         <Button variant="primary" type="submit">
                             Save

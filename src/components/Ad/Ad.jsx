@@ -32,8 +32,8 @@ class Ad extends React.Component {
                         >
                             { ad.name }
                         </h5>
-                        <p className='card-text'>{ ad.description }</p>
                         <h2 className='text-center'><span className='badge badge-primary'>{ ad.price } €</span></h2>                
+                        <p className='card-text'>{ ad.description }</p>
                     </div>
                 </div>
         );

@@ -6,11 +6,9 @@ import * as API from '../../services/AdService';
 export default class TagSelect extends React.Component {
 
 /*
-    No funciona enviar el valor del select a register:  https://stackblitz.com/edit/092019-react-class-event-parent-child?file=index.js
-    https://medium.com/@kyledavelaar/updating-parent-component-state-from-children-components-in-react-2ead9b9cec9f
-    https://ourcodeworld.com/articles/read/409/how-to-update-parent-state-from-child-component-in-react
-
-    https://react-select.com/home || - https://blog.logrocket.com/getting-started-with-react-select/
+    - Get tags from API and list on select
+        · Select [options] must contain values with format {value: option, label: option}
+    - Return selected value (selectedOption.value) on target object, to be user for parent handlers
 */
 
     constructor(props) {
@@ -36,11 +34,12 @@ export default class TagSelect extends React.Component {
     handleChange = selectedOption => {
 
         this.setState(
-            { selectedOption },
-            () => console.log(`TagSelect.selectedOption:`, this.state) 
+            { selectedOption }
+            //,() => console.log(`TagSelect.selectedOption:`, this.state) 
         );
 
-        this.props.onChange(selectedOption.value);  // save value on parent
+        // save value on parent
+        this.props.onChange({ target: { name: 'tags', value: selectedOption.value } });
     };
 
     
@@ -61,6 +60,5 @@ export default class TagSelect extends React.Component {
 
 TagSelect.propTypes = {
     value: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    options: PropTypes.array.isRequired
+    onChange: PropTypes.func.isRequired
 }
