@@ -40,8 +40,8 @@ const searchAds = (query) => {
         .then(res => res.results.map(ad => new AdModel(ad)))
 }
 
-const saveAd = (ad, method) => {
-    return fetch(`${API_URL}anuncios`, {
+const saveAd = (ad, method, id) => {
+    return fetch(`${API_URL}anuncios/${id}`, {
         method: `${method}`,
         body: JSON.stringify(ad), // data can be `string` or {object}!
             headers: {

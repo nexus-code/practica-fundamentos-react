@@ -22,7 +22,7 @@ class AdEdit extends React.Component {
             advert: {
                 id: '',
                 name: '',
-                price: 0,
+                price: '',
                 description: '',
                 type: TYPES[0],
                 photo: '',
@@ -42,10 +42,6 @@ class AdEdit extends React.Component {
 
                     this.props.history.push("/404");
                 } else {
-
-                    console.log('advert Constructor', advert);
-
-                    // const advert = Object.assign({}, ad.adModel)
 
                     this.setState({
                         advert: advert,
@@ -69,6 +65,11 @@ class AdEdit extends React.Component {
     handleChange(event) {
 
         const { name, value } = event.target;
+
+        console.log('name', name);
+        console.log('value', value);
+        console.log('event', event);
+
 
         this.setState(({ advert }) => ({
             advert: {
@@ -107,7 +108,7 @@ class AdEdit extends React.Component {
             return;
         }        
 
-        saveAd(this.state.advert, this.state.method)
+        saveAd(this.state.advert, this.state.method, this.state.advert.id)
             .then (res => { 
 
                     console.log('res', res)
@@ -156,7 +157,7 @@ class AdEdit extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="formGroupPrice" >
                             <Form.Label>Price</Form.Label>
-                            <Form.Control name="price" placeholder="on €" value={advert.price} onChange={ this.handleChange } type="number" step=".01" />
+                            <Form.Control name="price" placeholder="on €" value={advert.price} onChange={ this.handleChange } type="number" />
                         </Form.Group>
                         <Form.Group controlId="formGroupPhoto" >
                             <Form.Label>Photo</Form.Label>
@@ -185,7 +186,7 @@ class AdEdit extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="formGrouptags" >
                             <Form.Label>Tag</Form.Label>
-                            <TagSelect onChange={this.handleChange}  value={ advert.tags } isMulti={true} />
+                            <TagSelect onChange={this.handleChange}  value={ advert.tags } isMulti />
                         </Form.Group>
 
                         <Button variant="primary" type="submit" disabled={status}>
