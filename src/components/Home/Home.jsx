@@ -49,7 +49,7 @@ export default class Home extends React.Component {
 
     render() {
         const { ads } = this.state;
-        // this.recoverContext();
+        this.recoverContext();
         
         return (
             <>
