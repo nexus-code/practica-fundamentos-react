@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter }  from 'react-router-dom'
 import { Navbar, Nav } from 'react-bootstrap';
-import { getUserLS, isEmpty } from '../../utils/localStorage';
 
 
 // Implement App requirement:

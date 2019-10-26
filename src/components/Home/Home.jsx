@@ -14,19 +14,21 @@ export default class Home extends React.Component {
         super(props);
 
         
-        // const user = getUserLS();
-        // if (isEmpty(user)) {
+        const user = getUserLS();
+        if (isEmpty(user)) {
             
-        //     this.gotoRegisterWithoutUser();
-        //     return
-        // }
+            this.gotoRegisterWithoutUser();
+            this.state = { ads: [] };
+        } else {
 
-        this.state = {
-            ads: [],
-            user: getUserLS()
+            this.state = {
+                ads: [],
+                user: getUserLS()
+            }
+    
+            this.searchAds();
         }
 
-        this.searchAds();
     }
 
     searchAds = () => {
