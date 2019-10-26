@@ -14,6 +14,7 @@ const TYPES = ['sell', 'buy']
 class AdEdit extends React.Component { 
 
     // Create & update Ads
+    // On create change page title and disables save button
 
     constructor(props) {
         super(props);
@@ -66,11 +67,6 @@ class AdEdit extends React.Component {
 
         const { name, value } = event.target;
 
-        console.log('name', name);
-        console.log('value', value);
-        console.log('event', event);
-
-
         this.setState(({ advert }) => ({
             advert: {
                 ...advert,
@@ -113,10 +109,13 @@ class AdEdit extends React.Component {
 
                     console.log('res', res)
                     if (res === 'OK') {
-                        this.setState({ 
-                            title: 'Advertisement saved!',
-                            status: true
-                        });
+                        
+                        if (this.state.method == 'POST')
+                            this.setState({ 
+                                title: 'Advertisement saved!',
+                                status: true
+                            });
+
                         this.notifySaved();
                     } else {
                         this.notifyError();
@@ -129,8 +128,6 @@ class AdEdit extends React.Component {
 
 
         return false;
-
-        // this.props.history.push("/home");
     } 
 
     gotoHome = () => this.props.history.push('/');
@@ -139,7 +136,6 @@ class AdEdit extends React.Component {
     notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
 
     render() {
-
 
         const { advert, title, status } = this.state;
 
@@ -201,8 +197,6 @@ class AdEdit extends React.Component {
         );
     }
 }
-
-
 
 AdEdit.contextType = UserContext;
 

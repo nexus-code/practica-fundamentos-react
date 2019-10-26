@@ -41,6 +41,11 @@ const searchAds = (query) => {
 }
 
 const saveAd = (ad, method, id) => {
+
+    // ad: {advertisement}
+    // method: POST / PUT (for insert / update ) 
+    // id: empty in POST. advertisement ID with PUT
+
     return fetch(`${API_URL}anuncios/${id}`, {
         method: `${method}`,
         body: JSON.stringify(ad), // data can be `string` or {object}!
@@ -49,7 +54,7 @@ const saveAd = (ad, method, id) => {
             }
         })
         .then(res => {
-            // the API returns status, but not de advert sent :/
+            // the API returns status, but not de advert sent 
             if (res.status === 200) {
                 return 'OK';
             } else {
