@@ -24,13 +24,7 @@ export default class App extends React.Component {
 
   updateUser(user) {
     
-    console.log('APP pre this.context: ', this.context);
-    console.log('APP pre recived user: ', user);
-    
     this.setState({ user });
-
-    console.log('APP post this.context: ', this.context);
-
   }
 
   render() {
@@ -43,6 +37,7 @@ export default class App extends React.Component {
                 <Switch>
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/profile" component={ Profile } />
+                  {/* <Route path='/advert/' component={AdEdit} /> */}
                   <Route path='/advert/create' component={ AdEdit } />
                   <Route path='/advert/edit/:id' component={ AdEdit } />
                   <Route path='/advert/:id' component={ AdDetail } />

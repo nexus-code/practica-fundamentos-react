@@ -1,28 +1,21 @@
-import React     from "react";
+import React from "react";
 import AppNavbar from '../AppNavbar/AppNavbar';
-
+import { withRouter } from "react-router-dom";
 import { UserContext } from '../../context/UserContext'
 import { getUserLS, isEmpty } from '../../utils/localStorage';
-import * as API      from '../../services/AdService';
-import AdList        from '../AdList/AdList';
+import * as API from '../../services/AdService';
+import AdList from './AdList';
 
-export default class Home extends React.Component {
+class Search extends React.Component {
 
     static contextType = UserContext;
 
     constructor(props) {
         super(props);
 
-        
-        // const user = getUserLS();
-        // if (isEmpty(user)) {
-            
-        //     this.gotoRegisterWithoutUser();
-        //     return
-        // }
-
         this.state = {
             ads: [],
+            query: '',
             user: getUserLS()
         }
 
@@ -40,28 +33,26 @@ export default class Home extends React.Component {
         });
     }
 
-    componentDidMount() {
-
-        this.recoverContext();
-    }
-
-    gotoRegisterWithoutUser() {
-
-        this.props.history.push("/register");
-    }
 
     recoverContext() {
-        //Recover context from localStorage (recovered on this.state.user)
+
+        //mejorar
+
+        console.log('recoverContext context pre', this.context);
+
 
         if (isEmpty(this.context.user))
             this.context.updateUser(this.state.user);
+
+        console.log('recoverContext context post', this.context);
     }
 
 
     render() {
         const { ads } = this.state;
+        this.recoverContext();
 
-        return (           
+        return (
             <>
                 <AppNavbar />
 
@@ -70,9 +61,11 @@ export default class Home extends React.Component {
                     &&
                     ads.length
                     &&
-                    <AdList ads={ ads } />
+                    <AdList ads={ads} />
                 }
             </>
         );
     }
 }
+
+export default withRouter(Search);

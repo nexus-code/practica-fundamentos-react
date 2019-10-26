@@ -53,14 +53,10 @@ export default class Register extends React.Component {
             return;
         }
 
-        // console.log('submit', this.state);
-        
         setUserLS(this.state.user);
         
         this.context.updateUser(this.state.user);
 
-        console.log('UserContext.user REgister: ', UserContext.user);
-        
         this.props.history.push("/home");
     }
 

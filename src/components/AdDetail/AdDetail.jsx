@@ -1,18 +1,23 @@
 import React           from "react";
 import { withRouter }  from "react-router-dom";
 import { Button, Spinner } from 'react-bootstrap'
-import AppNavbar       from '../AppNavbar/AppNavbar';
 import { getAdDetail } from '../../services/AdService';
 
+import { UserContext } from '../../context/UserContext'
+import { getUserLS, isEmpty } from '../../utils/localStorage';
+
+import AppNavbar       from '../AppNavbar/AppNavbar';
+
 class AdDetail extends React.Component {
+
+    static contextType = UserContext;
+
     constructor(props) {
         super(props);
 
         this.state = {
             AdID: this.props.match.params.id
         };
-
-        // const AdID = this.props.match.params.id;
 
         this.goBack = this.goBack.bind(this);
         this.editAdvert = this.editAdvert.bind(this);
@@ -39,6 +44,19 @@ class AdDetail extends React.Component {
         this.props.history.push(`../advert/edit/${this.state.AdID}`);
     }
 
+    componentDidMount() {
+
+        this.recoverContext();
+    }
+
+    recoverContext() {
+        //Recover context from localStorage (recovered on this.state.user)
+
+        if (isEmpty(this.context.user))
+            this.context.updateUser(getUserLS());
+    }
+
+    
     render() {
         const { ad } = this.state;
 

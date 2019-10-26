@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter }  from 'react-router-dom'
-import { UserContext } from '../../context/UserContext'
-// import { isEmpty, getUserLS } from '../../utils/localStorage';
-import { Navbar, Button, Form, FormControl, Nav } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
+import { getUserLS, isEmpty } from '../../utils/localStorage';
+
 
 // Implement App requirement:
 // - Si un usuario se ha registrado, accede, por ejemplo, al listado de anuncios y recarga la página el sistema deberá obtener el usuario del LocalStorage y
@@ -14,28 +14,12 @@ import { Navbar, Button, Form, FormControl, Nav } from 'react-bootstrap';
 // - https://medium.com/@leonardellifernando/reactjs-navbar-con-bootstrap-y-react-router-85f8ba82edc1
 
 class AppNavbar extends React.Component {
-
-    static contextType = UserContext;
-
-    //////////////////////////////
-    // search = (e) => {
-    //     // close down search
-    //     const query = e.target.value;
-
-    //     if (query && query.trim().length) {
-    //         API.searchAds(query).then(ads => this.setState({ ads }))
-    //     } else {
-    //         this.searchAds();
-    //     }
-    // };
-    
+   
     getNavLinkClass = (path) => {
         return this.props.location.pathname === path ? 'active' : '';
     }
-    
-    render() {
 
-        // console.log('context: ', this.context);
+    render() {
 
         return (
             <Navbar bg="dark" variant="dark" expand="lg">
@@ -44,12 +28,9 @@ class AppNavbar extends React.Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/profile">My profile</Nav.Link>
+                        <Nav.Link href="/advert/">Search</Nav.Link>
                         <Nav.Link href="/advert/create">New advert</Nav.Link>
                     </Nav>
-                    <Form inline style={{}}>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
                 </Navbar.Collapse>
             </Navbar>
         )
@@ -57,7 +38,6 @@ class AppNavbar extends React.Component {
 };
 
 AppNavbar.propTypes = {
-    // value: PropTypes.string,
     displaySearch: PropTypes.bool
 }
 
