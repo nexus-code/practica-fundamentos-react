@@ -9,6 +9,8 @@ export default class TagSelect extends React.Component {
     - Get tags from API and list on select
         · Select [options] must contain values with format {value: option, label: option}
     - Return selected value (selectedOption.value) on target object, to be user for parent handlers
+    - isMulti is false by default, no mandatory (how indicates in prop types)
+    - value contains values by default, as string or array
 */
 
     constructor(props) {
@@ -33,6 +35,8 @@ export default class TagSelect extends React.Component {
 
     handleChange = selectedOption => {
 
+        // Save and show seleceted value 
+        // Pass that values to parent
         // Dont remove to understand this function: console.log('selectedOption', selectedOption);
 
         this.setState(
@@ -72,12 +76,12 @@ export default class TagSelect extends React.Component {
                     isMulti
                     &&
                     <Select
+                        value={ selectedValues }
                         onChange={this.handleChange}
                         options={options}
                         isMulti
                         className="basic-multi-select"
                         classNamePrefix="select"
-                        value={ selectedValues }
                     />
                 }
 
@@ -99,5 +103,6 @@ export default class TagSelect extends React.Component {
 
 TagSelect.propTypes = {
     // value: PropTypes.string,
+    isMulti: PropTypes.bool,
     onChange: PropTypes.func.isRequired
 }
