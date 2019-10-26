@@ -82,7 +82,7 @@ class AdEdit extends React.Component {
         // console.log('submit', this.state);
         // return false;
 
-        const { name, price, description, photo, type } = this.state.advert;
+        const { name, price, description, photo } = this.state.advert;
 
         if (name.trim().length <= 3) {
             alert("The name must be bigger than 3 characters");
@@ -110,7 +110,7 @@ class AdEdit extends React.Component {
                     console.log('res', res)
                     if (res === 'OK') {
                         
-                        if (this.state.method == 'POST')
+                        if (this.state.method === 'POST')
                             this.setState({ 
                                 title: 'Advertisement saved!',
                                 status: true

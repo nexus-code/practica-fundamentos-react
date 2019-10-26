@@ -7,8 +7,6 @@
 
 export const setUserLS = user => {
 
-  console.log('setUserLS');
-
   localStorage.setItem('data', JSON.stringify(user));
 };
 
@@ -19,4 +17,15 @@ export const getUserLS = () => {
 
 export const clearLocalStorage = () => {
   localStorage.clear();
+}
+
+// 
+
+export const isEmpty = (obj) => {
+  // https://firstclassjs.com/check-if-object-is-empty-in-javascript/
+
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) return false;
+  }
+  return true;
 }

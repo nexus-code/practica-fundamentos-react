@@ -1,27 +1,42 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
+import { withRouter }  from 'react-router-dom'
+import { UserContext } from '../../context/UserContext'
+// import { isEmpty, getUserLS } from '../../utils/localStorage';
 import { Navbar, Button, Form, FormControl, Nav } from 'react-bootstrap';
+
+// Implement App requirement:
+// - Si un usuario se ha registrado, accede, por ejemplo, al listado de anuncios y recarga la página el sistema deberá obtener el usuario del LocalStorage y
+// almacenarlo en el contexto para así no perder al usuario de la aplicación.Este comportamiento debe ser el mismo en el detalle de un anuncio o en el crear /  actualizar un anuncio.
+
 
 // + https://react-bootstrap.github.io/components/navbar/
 // - https://medium.com/@leonardellifernando/reactjs-navbar-con-bootstrap-y-react-router-85f8ba82edc1
 
 class AppNavbar extends React.Component {
 
-    // constructor(props) {
-    //     super(props);
+    static contextType = UserContext;
 
-    //     this.state = {
-    //         displaySearch = 
+    //////////////////////////////
+    // search = (e) => {
+    //     // close down search
+    //     const query = e.target.value;
+
+    //     if (query && query.trim().length) {
+    //         API.searchAds(query).then(ads => this.setState({ ads }))
+    //     } else {
+    //         this.searchAds();
     //     }
-    // }
-
-
+    // };
+    
     getNavLinkClass = (path) => {
         return this.props.location.pathname === path ? 'active' : '';
     }
     
     render() {
+
+        // console.log('context: ', this.context);
+
         return (
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Navbar.Brand href="/">Wallakeep</Navbar.Brand> 
@@ -40,7 +55,6 @@ class AppNavbar extends React.Component {
         )
     }
 };
-
 
 AppNavbar.propTypes = {
     // value: PropTypes.string,

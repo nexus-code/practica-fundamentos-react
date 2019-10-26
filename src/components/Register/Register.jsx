@@ -6,8 +6,10 @@ import TagSelect from '../TagsSelect/TagSelect'
 
 
 export default class Register extends React.Component { 
-
+    
     // Define user & save on context & local storage
+    
+    static contextType = UserContext;
 
     constructor(props) {
         super(props);
@@ -38,7 +40,6 @@ export default class Register extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log('submit', this.state);
         
         const { name, surname } = this.state.user;
 
@@ -53,11 +54,13 @@ export default class Register extends React.Component {
         }
 
         // console.log('submit', this.state);
-        // return false;
-
+        
         setUserLS(this.state.user);
-
+        
         this.context.updateUser(this.state.user);
+
+        console.log('UserContext.user REgister: ', UserContext.user);
+        
         this.props.history.push("/home");
     }
 
@@ -89,5 +92,3 @@ export default class Register extends React.Component {
         );
     }
 }
-
-Register.contextType = UserContext;
