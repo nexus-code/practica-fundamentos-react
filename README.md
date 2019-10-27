@@ -1,73 +1,38 @@
 
-https://github.com/IsmaelB83/keepcoding-backend-node
+## Wallakeep: PRACTICE BASICS REACT. VII Full Stack Developer KeepCoding Course:
 
+Wallakeep
+Esta práctica se realizará conjuntamente a la práctica de Nodepop que se realizó
+durante el módulo de NodeJS.<br /><br />
+Los endpoints que nos ofrece Nodepop son los siguientes:<br />
+- Listar anuncios (con filtro y paginación)<br />
+- Obtener el detalle de un anuncio<br />
+- Crear un anuncio<br />
+- Actualizar un anuncio<br />
+- Obtener todos los tags que se puedan usar<br /><br />
+El Nodepop que vamos a usar es el siguiente:<br />
+https://github.com/IsmaelB83/keepcoding-backend-node<br />
+Gracias a Ismael por ofrecerlo a modo de punto común en todas las prácticas.<br /><br />
+La práctica consiste en realizar un frontal en React que cumpla los siguientes
+requisitos:<br />
+- Todos los componentes deben pertenecer a una ruta, por ejemplo, el listado
+de anuncios puede ser /advert<br />
+- Debe existir al menos un error boundary que englobe a toda la aplicación.<br />
+- Una vez el usuario se haya registrado este debe ser almacenado en un<br />
+contexto que engloba a toda la aplicación y en el LocalStorage.<br />
+- Si un usuario se ha registrado, accede, por ejemplo, al listado de anuncios y
+recarga la página el sistema deberá obtener el usuario del LocalStorage y
+almacenarlo en el contexto para así no perder al usuario de la aplicación. Este
+comportamiento debe ser el mismo en el detalle de un anuncio o en el crear /
+actualizar un anuncio.<br /><br />
+Los componentes que debe contener Wallakeep son:<br />
+- Registro : en él se pedirá: nombre, apellidos y tag. Estos tags deberán de ser
+recuperados del endpoint que devuelve todos los tags.<br />
+- Crear/Actualizar : permite tanto crear un anuncio como editarlo, no son dos
+componentes distintos, debe ser uno solo que haga las dos funcionalidades.<br />
+- Listado : permitirá listar todos los anuncios y se deberán implementar los
+filtros que proporcione Nodepop (nombre, precio, tag…)<br />
+- Detalle : permitirá visualizar el detalle de un anuncio. El ID del anuncio deberá
+ser pasado como path param, en su ruta (/advert/:id).<br />
 
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Structure and main components
