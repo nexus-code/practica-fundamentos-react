@@ -34,7 +34,9 @@ filtros que proporcione Nodepop (nombre, precio, tag…)<br />
 - Detalle : permitirá visualizar el detalle de un anuncio. El ID del anuncio deberá
 ser pasado como path param, en su ruta (/advert/:id).<br />
 
-### Structure and main components
+## Structure and main components
+===========================
+
 
 lorem ipsum
 **lorem ipsum**
