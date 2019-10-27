@@ -1,4 +1,4 @@
-## Wallakeep: <br>PRACTICE BASICS REACT. VII Full Stack Developer KeepCoding Course:
+# Wallakeep: <br>PRACTICE BASICS REACT. VII Full Stack Developer KeepCoding Course:
 
 Wallakeep
 Esta práctica se realizará conjuntamente a la práctica de Nodepop que se realizó

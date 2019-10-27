@@ -38,6 +38,8 @@ const searchAds = (query) => {
     
     const url = query === '' ? `${API_URL}anuncios` : `${API_URL}anuncios/?${query}`;
     
+    console.log('', url);
+
     return getRequest(url)
         .then(res => res.results.map(ad => new AdModel(ad)))
         .catch(error => console.error('Error:', error));
