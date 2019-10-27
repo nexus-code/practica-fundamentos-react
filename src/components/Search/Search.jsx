@@ -8,14 +8,13 @@ import AdList from './AdList';
 
 class Search extends React.Component {
 
-    /* Show ads by user selected tag */
+    /* Show ads by filters */
 
     static contextType = UserContext;
 
 
     constructor(props) {
         super(props);
-
 
         const user = getUserLS();
         if (isEmpty(user)) {

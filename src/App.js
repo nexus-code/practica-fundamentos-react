@@ -38,7 +38,7 @@ export default class App extends React.Component {
                 <Switch>
                   <Route exact path="/register" component={ Register } />
                   {/* <Route exact path="/profile" component={ Profile } /> */}
-                  <Route path='/advert/' component={AdEdit} />
+                  <Route path='/advert/' component={ Search } />
                   <Route path='/advert/create' component={ AdEdit } />
                   <Route path='/advert/edit/:id' component={ AdEdit } />
                   <Route path='/advert/:id' component={ AdDetail } />
