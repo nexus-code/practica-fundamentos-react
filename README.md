@@ -34,9 +34,29 @@ filtros que proporcione Nodepop (nombre, precio, tag…)<br />
 - Detalle : permitirá visualizar el detalle de un anuncio. El ID del anuncio deberá
 ser pasado como path param, en su ruta (/advert/:id).<br />
 
-## Structure and main components
-===========================
+## Structure and components overview
 
+
+### App.js
+Manages Context, Routes & Error boundary.
+
+### utils/localStorage
+Get & Set user on local Storage
+
+### services/AdService
+Comunicates app with API. User models/AdModel to format ads
+
+### Register & Profile
+Manages user data and his default tag. Uses TagsSelect component.
+
+### Home
+Lists ads by defaul tags. Uses AdList component.
+
+### Search (/advert/)
+Lists searched ads.  Uses AdList, TagsSelect, input & others components.
+
+### Adlist
+Receives ads to list, and show them paginated 
 
 lorem ipsum
 **lorem ipsum**
