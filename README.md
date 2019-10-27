@@ -67,7 +67,7 @@ Gets tags from API and lists them on a HTML Select. There are two options:
 - Multiple.- For select multiple tags. Uses on create / edit ads.
 
 ###
-### Errata faith
+### Errata faith (timeless)
 - I know, it's very very ugly.
 - When change params search, pagination barr no select 1, as the url.
 - Type radio buttons on search, not check selected item on first click.
