@@ -61,7 +61,6 @@ export default class TagSelect extends React.Component {
 
         const isMulti = false || this.props.isMulti;
 
-        const { selectedOption } = this.state;  // {value, label}
         const options = this.state.tags.map(tag => { let t = {}; t['value'] = tag; t['label'] = tag; return t });
 
         let selectedValues = this.props.value;  
@@ -69,7 +68,6 @@ export default class TagSelect extends React.Component {
         if (this.props.value !== 'undefined' && Array.isArray(this.props.value))
             selectedValues = this.props.value.map(tag => { let t = {}; t['value'] = tag; t['label'] = tag; return t });
         
-
         return (
             <>
                 {
@@ -89,7 +87,7 @@ export default class TagSelect extends React.Component {
                     !isMulti
                     &&
                     <Select
-                        value={selectedOption}
+                        value={ selectedValues }
                         onChange={this.handleChange}
                         options={options}
                         className="basic-multi-select"
@@ -102,7 +100,7 @@ export default class TagSelect extends React.Component {
 }
 
 TagSelect.propTypes = {
-    // value: PropTypes.string,
+    value: PropTypes.arrayOf(PropTypes.string),
     isMulti: PropTypes.bool,
     onChange: PropTypes.func.isRequired
 }

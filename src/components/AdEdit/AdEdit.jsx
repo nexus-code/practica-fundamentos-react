@@ -168,6 +168,7 @@ class AdEdit extends React.Component {
         }
 
         const { advert, title, status } = this.state;
+        console.log('this.state onSubmit', this.state);
 
         return (
             <>

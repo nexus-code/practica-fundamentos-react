@@ -19,7 +19,7 @@ export default class Profile extends React.Component {
             user: {
                 name: '',
                 surname: '',
-                tags: ''
+                tags: ['']
             }
         };
 
@@ -94,7 +94,7 @@ export default class Profile extends React.Component {
     render (){
         
         const { name, surname, tags } = this.state.user;
-console.log(tags);
+
         return (
             <>
                 <AppNavbar />
@@ -112,7 +112,7 @@ console.log(tags);
                         </Form.Group>
                         <Form.Group controlId="formGrouptags" >
                             <Form.Label>Tags</Form.Label>
-                            <TagSelect onChange={this.handleChange} value={ tags } />
+                            <TagSelect onChange={this.handleChange} value={ [tags] } />
                         </Form.Group>
 
                         <Button variant="primary" type="submit">
