@@ -52,11 +52,19 @@ Manages user data and his default tag. Uses TagsSelect component.
 ### Home
 Lists ads by defaul tags. Uses AdList component.
 
-### Search (/advert/)
+### Search (/advert)
 Lists searched ads.  Uses AdList, TagsSelect, input & others components.
 
 ### Adlist
 Receives ads to list, and show them paginated 
+
+## AdEdit
+Allows create and edit ads. Use TagSelect components.
+
+### TagsSelect
+Gets tags from API and lists them on a HTML Select. There are two options:
+- Single.- For an unique tag. Uses on Register, profile and search.
+- Multiple.- For select multiple tags. Uses on create / edit ads.
 
 lorem ipsum
 **lorem ipsum**
