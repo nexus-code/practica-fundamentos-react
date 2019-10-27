@@ -10,7 +10,7 @@ import TagSelect        from '../TagsSelect/TagSelect'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const TYPES = ['sell', 'buy']
+const TYPES = ['sell', 'buy'];
 
 class AdEdit extends React.Component { 
 
