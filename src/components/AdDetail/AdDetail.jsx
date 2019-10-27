@@ -1,9 +1,8 @@
 import React           from "react";
 import { withRouter }  from "react-router-dom";
-import { Button, Spinner } from 'react-bootstrap'
 import { getAdDetail } from '../../services/AdService';
-
 import { UserContext } from '../../context/UserContext'
+import { Button, Spinner }    from 'react-bootstrap'
 import { getUserLS, isEmpty } from '../../utils/localStorage';
 
 import AppNavbar       from '../AppNavbar/AppNavbar';
@@ -15,23 +14,36 @@ class AdDetail extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            AdID: this.props.match.params.id
-        };
+        const user = getUserLS();
+        if (isEmpty(user)) {
 
-        this.goBack = this.goBack.bind(this);
-        this.editAdvert = this.editAdvert.bind(this);
+            this.gotoRegisterWithoutUser();
 
-        getAdDetail(this.state.AdID).then(ad => {
-            
-            if (ad.hasOwnProperty('success')) {
+        } else {
 
-                this.props.history.push("/404");
-            } else {
+            this.state = {
+                AdID: this.props.match.params.id
+            };
+
+            this.goBack = this.goBack.bind(this);
+            this.editAdvert = this.editAdvert.bind(this);
+
+            getAdDetail(this.state.AdID).then(ad => {
                 
-                this.setState({ ad });
-            }
-        });
+                if (ad.hasOwnProperty('success')) {
+
+                    this.props.history.push("/404");
+                } else {
+                    
+                    this.setState({ ad });
+                }
+            });
+        }
+    }
+
+    gotoRegisterWithoutUser() {
+
+        this.props.history.push("/register");
     }
 
     goBack(){
@@ -55,9 +67,15 @@ class AdDetail extends React.Component {
         if (isEmpty(this.context.user))
             this.context.updateUser(getUserLS());
     }
-
     
     render() {
+
+        if (isEmpty(this.state)) {
+
+            // there is no local user but the component needs to be rendered
+            return(<></>);
+        }
+
         const { ad } = this.state;
 
         return (

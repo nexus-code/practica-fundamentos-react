@@ -8,7 +8,10 @@ import AdList        from '../AdList/AdList';
 
 export default class Home extends React.Component {
 
+    /* Show ads by user selected tag */
+    
     static contextType = UserContext;
+
 
     constructor(props) {
         super(props);

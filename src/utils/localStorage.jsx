@@ -2,9 +2,6 @@
 * Save user on local Storage
 */
 
-// View to set on sessionStorage
-
-
 export const setUserLS = user => {
 
   localStorage.setItem('data', JSON.stringify(user));
@@ -19,7 +16,11 @@ export const clearLocalStorage = () => {
   localStorage.clear();
 }
 
-// 
+//Note: See configuring on sessionStorage or to make configurable
+
+/*
+* complementary functions
+*/
 
 export const isEmpty = (obj) => {
   // https://firstclassjs.com/check-if-object-is-empty-in-javascript/
