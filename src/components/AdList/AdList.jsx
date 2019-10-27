@@ -63,16 +63,14 @@ class AdList extends React.Component {
     
     render() {
         let { ads } = this.props;
+        // const { currentPage, pages } = this.state;
         
         // pagination
         const pages = Math.ceil(ads.length / ITEMS_PER_PAGE);
         let currentPage = this.getCurrentPage(ads.length);
         
-        if (currentPage > pages){
-            // this.props.history.push(`/home?page=${pages}`); //Warning: Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.
-            currentPage = pages;
-            
-        }        
+        if (currentPage > pages)
+            currentPage = pages;            
 
         const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;    // first index on [ads] to show in this page
 

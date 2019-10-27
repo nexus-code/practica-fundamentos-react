@@ -65,9 +65,17 @@ export default class Search extends React.Component {
             .then(ads => {
             this.setState({
                 ads
-            })
+            }, () => (this.goTo(1)))
         });
+        
     }
+
+    goTo(index) {
+        // redirect to first index of serie
+
+        const path = `${this.props.location.pathname}?page=${index}`;
+        this.props.history.push(path);
+    } 
 
     componentDidMount() {
 
