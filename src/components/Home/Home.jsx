@@ -64,7 +64,6 @@ export default class Home extends React.Component {
 
     render() {
         const { ads } = this.state;
-        console.log(this.props.location.pathname);
 
         return (           
             <>

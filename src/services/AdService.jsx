@@ -18,7 +18,8 @@ const getRequest = (url) => {
 const getTagsList = () => {
     // [] of tags (strings)
     return getRequest(`${API_URL}tags`)
-        .then(res => res.results);
+        .then(res => res.results)
+        .catch(error => console.error('Error:', error));
 }
 
 const getAdDetail = (adID) => {
@@ -30,14 +31,17 @@ const getAdDetail = (adID) => {
                 return new AdModel(res.result);
             }
         })
+        .catch(error => console.error('Error:', error));
 }
 
 const searchAds = (query) => {
     
     const url = query === '' ? `${API_URL}anuncios` : `${API_URL}anuncios/?${query}`;
+    console.log('url', url);
     
     return getRequest(url)
         .then(res => res.results.map(ad => new AdModel(ad)))
+        .catch(error => console.error('Error:', error));
 }
 
 const saveAd = (ad, method, id) => {

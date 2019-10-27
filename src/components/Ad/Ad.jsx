@@ -34,6 +34,11 @@ class Ad extends React.Component {
                         <h5 className='card-title'>{ ad.name }</h5>
                         <h2 className='text-center'><span className='badge badge-primary'>{ ad.price } €</span></h2>                
                         <p className='card-text'>{ ad.description }</p>
+                        <p>
+                            {
+                                ad.tags.map(tag => <span className='badge badge-secondary p-2 mr-2' key={tag}> { tag } </span> )
+                            }
+                        </p>
                     </div>
                 </div>
         );

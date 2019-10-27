@@ -3,6 +3,7 @@ import AppNavbar from '../AppNavbar/AppNavbar';
 import { Form }  from 'react-bootstrap';
 import AdList    from '../AdList/AdList';
 import TagSelect from '../TagsSelect/TagSelect'
+import Input     from '../Input/Input'
 import * as API  from '../../services/AdService';
 import { UserContext } from '../../context/UserContext'
 import { getUserLS, isEmpty } from '../../utils/localStorage';
@@ -28,11 +29,11 @@ export default class Search extends React.Component {
 
             this.state = {
                 ads: [],
-                // tags: '',
+                tags: '',
                 // minPrice: '',
                 // maxPrice: '',
-                // type: '',
-                // name: ''
+                type: '',
+                name: ''
             }
 
             this.searchAds();
@@ -44,16 +45,21 @@ export default class Search extends React.Component {
     searchAds = () => {
 
         
-        const { tags, ads } = this.state;
-        const searchString = `?tag=${this.state.tags}&`
+        const { tags, name } = this.state;
+        let searchString = tags === '' ? '' : `tag=${this.state.tags}&`;
+        searchString += name === '' ? '' : `name=${this.state.name}&`;
+        // const searchString = `tag=work&`
+
+        console.log('tags', tags);
 
         console.log('searchString', searchString);
-        console.log('tags', tags);
-        console.log('this.state', this.state);
+        // console.log('tags', tags);
+        // console.log('this.state', this.state);
 
 
         // API.searchAds(`tag=${this.state.user.tags}`).then(ads => {
-        API.searchAds(searchString).then(ads => {
+        API.searchAds(searchString)
+            .then(ads => {
             this.setState({
                 ads
             })
@@ -81,60 +87,51 @@ export default class Search extends React.Component {
     handleChange(event) {
 
         const { name, value } = event.target;
+        // console.log(name, value);
 
-        // this.setState(({ search }) => ({
-        //     search: {
-        //         ...search,
-        //         [name]: value
-        //     }
-        // }));
         this.setState({
+            ads: [],    // reset 
             [name]: value
-        });
+        }, () => this.searchAds()); // search after setState via callback
 
-        this.searchAds();
     }   
 
-
     render() {
-        const { ads, tags, type } = this.state;
-        console.log(this.state);
-        console.log(this.props.location.pathname);
-
-
+        const { ads, tags, name, type } = this.state;
 
         return (
             <>
                 <AppNavbar />
                 <div className='container mt-5 mb-5'>
-                    <div className='card'>
-                        <h3 className="mb-4">Search products:</h3>
+                    <h3 className="mb-4">Search products:</h3>
                         
-                        <div className="col-5 mb-3">
-                            Tag: <TagSelect onChange={this.handleChange} value={tags} />
-                        </div>
-                        <div className="col-5 mb-3">
-                            Type:
-                            <div key={`inline-${type}`} className="mb-3">
-                                {TYPES.map(type => (
-                                    <div key={`inline-${type}`} className="mb-3">
-                                        <Form.Check inline type='radio' id={`check-api-${type}`}>
-                                            <Form.Check.Input
-                                                name='type'
-                                                value={`${type}`}
-                                                type='radio'
-                                                onChange={this.handleChange}
-                                                checked={`${type}` === type}
-                                            />
-                                            <Form.Check.Label style={{ textTransform: 'capitalize' }}>{` ${type}`}</Form.Check.Label>
-                                        </Form.Check>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-
+                    <div className="col-5 mb-3">
+                        Tag: <TagSelect onChange={this.handleChange} value={tags} />
                     </div>
+                    <div className="col-5 mb-3">
+                        Name: <Input onChange={this.handleChange} name={`name`} value={name} placeholder={`Pulse enter to end`} />
+                    </div>
+                    <div className="col-5 mb-3">
+                        Type:
+                        <div key={`inline-${type}`} className="mb-3">
+                            {TYPES.map(type => (
+                                <div key={`inline-${type}`} className="mb-3">
+                                    <Form.Check inline type='radio' id={`check-api-${type}`}>
+                                        <Form.Check.Input
+                                            name='type'
+                                            value={`${type}`}
+                                            type='radio'
+                                            onChange={this.handleChange}
+                                            checked={`${type}` === type}
+                                        />
+                                        <Form.Check.Label style={{ textTransform: 'capitalize' }}>{` ${type}`}</Form.Check.Label>
+                                    </Form.Check>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+
                 </div>
 
                 {
