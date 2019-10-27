@@ -116,7 +116,7 @@ export default class Search extends React.Component {
                     <h3 className="mb-4">Search products:</h3>
                     <Row>
                         <Col md={4} xs={12} >
-                            Tag: <TagSelect onChange={this.handleChange} value={tags} />
+                            Tag: <TagSelect onChange={this.handleChange} value={ [tags] } />
                         </Col>
                         <Col md={4} xs={12} >
                             Name: <br/><Input clasName="formControl" onChange={this.handleChange} name={`name`} value={name} placeholder={`Pulse enter to send`} />

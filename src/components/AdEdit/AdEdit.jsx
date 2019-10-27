@@ -168,13 +168,13 @@ class AdEdit extends React.Component {
         }
 
         const { advert, title, status } = this.state;
-        console.log('this.state onSubmit', this.state);
 
         return (
             <>
                 <AppNavbar />
                 <ToastContainer enableMultiContainer containerId={'OK'} position={toast.POSITION.TOP_RIGHT} />
                 <ToastContainer enableMultiContainer containerId={'KO'} position={toast.POSITION.TOP_RIGHT} />
+                
                 <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
                     <h2>{title}</h2>
                     <Form onSubmit={this.handleSubmit}>

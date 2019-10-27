@@ -5,6 +5,8 @@ import { setUserLS, getUserLS, isEmpty }    from '../../utils/localStorage';
 import AppNavbar        from '../AppNavbar/AppNavbar';
 import TagSelect        from '../TagsSelect/TagSelect'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class Profile extends React.Component { 
 
@@ -36,6 +38,11 @@ export default class Profile extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        toast.configure({
+            autoClose: 8000,
+            draggable: false,
+        });
     }
 
     handleChange(event) {
@@ -71,25 +78,35 @@ export default class Profile extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        console.log('this.context onSubmit', this.context);
-        console.log('this.state onSubmit', this.state);
+        const { name, surname } = this.state.user;
 
 
-        if (this.state.user.name.trim().length <= 3) {
+        if (name.trim().length <= 3) {
             alert("The name must be bigger than 3 characters");
             return;
         }
 
-        if (this.state.user.surname.trim().length <= 3) {
+        if (surname.trim().length <= 3) {
             alert("The surname must be bigger than 3 characters");
             return;
         }
 
-        setUserLS(this.state.user);
+        try {
+            
+            setUserLS(this.state.user);
+            this.context.updateUser(this.state.user);
 
-        this.context.updateUser(this.state.user);
-        this.props.history.push("/home");
+            this.notifySaved();
+
+        } catch (error) {
+            
+            this.notifyError();            
+        }
+
     }
+
+    notifySaved = () => toast.success('Advertisement saved !', { containerId: 'OK' });
+    notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
 
     render (){
         
@@ -98,6 +115,8 @@ export default class Profile extends React.Component {
         return (
             <>
                 <AppNavbar />
+                <ToastContainer enableMultiContainer containerId={'OK'} position={toast.POSITION.TOP_RIGHT} />
+                <ToastContainer enableMultiContainer containerId={'KO'} position={toast.POSITION.TOP_RIGHT} />
 
                 <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
                     <h2>Wellcome to WallaKeep</h2>
