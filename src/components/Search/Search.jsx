@@ -20,30 +20,31 @@ export default class Search extends React.Component {
     constructor(props) {
         super(props);
 
-        const user = getUserLS();
-        if (isEmpty(user)) {
-
-            this.gotoRegisterWithoutUser();
-            this.state = { ads: [] };
-        } else {
-
-            this.state = {
-                ads: [],
-                tags: '',
-                type: '',
-                name: '',
-                minPrice: '',
-                maxPrice: ''
-            }
-
-            this.searchAds();
+        this.state = {
+            ads: [],
+            user: getUserLS(),
+            tags: '',
+            type: '',
+            name: '',
+            minPrice: '',
+            maxPrice: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.reset = this.reset.bind(this);
     }
 
+    checkRegisteredUser() {
+
+        const user = getUserLS();
+        if (isEmpty(user))
+            this.gotoRegisterWithoutUser();
+
+    }
+
     searchAds = () => {
+
+        this.checkRegisteredUser();
 
         // Mounting searchString to send to the API
         const { tags, name, type, minPrice, maxPrice } = this.state;
@@ -71,6 +72,7 @@ export default class Search extends React.Component {
     componentDidMount() {
 
         this.recoverContext();
+        this.searchAds();
     }
 
     gotoRegisterWithoutUser() {

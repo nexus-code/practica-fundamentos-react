@@ -4,7 +4,20 @@ import { withRouter } from "react-router-dom";
 import Ad from '../Ad/Ad'
 import AppPagination from '../AppPagination/AppPagination'
 
+const ITEMS_PER_PAGE = 3; // !! pending: to config or register !!
+
 class AdList extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            pages: Math.ceil(this.props.ads.length / ITEMS_PER_PAGE),
+            currentPage: this.getCurrentPage(this.props.ads.length),
+            
+        }
+    
+    }
 
     buildMovieList = (ads) => {
         return (
@@ -17,7 +30,7 @@ class AdList extends React.Component {
     };
 
     
-    getCurrentPage(length, step) {
+    getCurrentPage(length) {
     // return current page from url. 1 by default
         
         const urlSearch = this.props.history.location.search;
@@ -31,26 +44,39 @@ class AdList extends React.Component {
         return parseInt(currentPage);
     }
 
-    componentDidMount(){
-        // pending: 
+    redirectOverPages (){
 
-        // if (currentPage > pages){
-        //     this.props.history.push(`/home?page=${pages}`);
-        // }        
+        // redirect to last page in case param page exceed max pagination page
+
+        let { currentPage , pages } = this.state;
+    
+        if (currentPage > pages) {
+            const path = `${this.props.location.pathname}?page=${pages}`;
+            this.props.history.push(path);
+        }
     }
 
+    componentDidMount (){
+
+        this.redirectOverPages();
+    }
+    
     render() {
         let { ads } = this.props;
-        const itemsPerPage = 3; // !! pending: to config or register !!
-            
+        
         // pagination
-        const pages = Math.ceil(ads.length / itemsPerPage);
-        const currentPage = this.getCurrentPage(ads.length);
+        const pages = Math.ceil(ads.length / ITEMS_PER_PAGE);
+        let currentPage = this.getCurrentPage(ads.length);
+        
+        if (currentPage > pages){
+            // this.props.history.push(`/home?page=${pages}`); //Warning: Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.
+            currentPage = pages;
+            
+        }        
 
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;    // first index on [ads] to show in this page
 
-        const startIndex = (currentPage - 1) * itemsPerPage;    // first index on [ads] to show in this page
-
-        ads = ads.slice(startIndex, startIndex + itemsPerPage); // Optimize on API call
+        ads = ads.slice(startIndex, startIndex + ITEMS_PER_PAGE); // Optimize on API call
         
         return (
             <div className='container mt-5 mb-5'>
