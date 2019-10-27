@@ -101,6 +101,10 @@ export default class TagSelect extends React.Component {
 
 TagSelect.propTypes = {
     value: PropTypes.arrayOf(PropTypes.string),
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string),
+    ]),
     isMulti: PropTypes.bool,
     onChange: PropTypes.func.isRequired
 }

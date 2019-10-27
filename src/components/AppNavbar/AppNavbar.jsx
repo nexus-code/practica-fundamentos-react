@@ -20,7 +20,7 @@ class AppNavbar extends React.Component {
                     <Nav className="mr-auto">
                         <Nav.Link className={this.getNavLinkClass("/advert/create")} href="/advert/create">New advert</Nav.Link>
                         <Nav.Link className={this.getNavLinkClass("/advert/")} href="/advert/">Search</Nav.Link>
-                        <Nav.Link href="/profile">My profile</Nav.Link>
+                        <Nav.Link className={this.getNavLinkClass("/profile/")} href="/profile">My profile</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

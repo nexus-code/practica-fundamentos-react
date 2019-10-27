@@ -68,3 +68,6 @@ Gets tags from API and lists them on a HTML Select. There are two options:
 
 ###
 ### Errata faith
+- I know, it's very very ugly.
+- When change params search, pagination barr no select 1, as the url.
+- Type radio buttons on search, not check selected item on first click.

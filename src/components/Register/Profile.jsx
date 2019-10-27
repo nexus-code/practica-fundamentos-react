@@ -119,7 +119,7 @@ export default class Profile extends React.Component {
                 <ToastContainer enableMultiContainer containerId={'KO'} position={toast.POSITION.TOP_RIGHT} />
 
                 <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
-                    <h2>Wellcome to WallaKeep</h2>
+                    <h2>Edit profile</h2>
                     <Form onSubmit = { this.handleSubmit }>
                         <Form.Group controlId="formGroupname" >
                             <Form.Label>Name</Form.Label>
@@ -134,8 +134,8 @@ export default class Profile extends React.Component {
                             <TagSelect onChange={this.handleChange} value={ [tags] } />
                         </Form.Group>
 
-                        <Button variant="primary" type="submit">
-                            Access
+                        <Button variant="primary float-right" type="submit">
+                            Save
                         </Button>
                     </Form>
                 </div>

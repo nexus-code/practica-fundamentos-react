@@ -80,7 +80,7 @@ export default class Register extends React.Component {
                         <TagSelect onChange={this.handleChange } />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary  float-right" type="submit">
                         Access
                     </Button>
                 </Form>
