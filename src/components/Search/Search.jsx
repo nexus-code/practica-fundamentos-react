@@ -121,7 +121,12 @@ export default class Search extends React.Component {
             <>
                 <AppNavbar />
                 <Container className='container mt-5 mb-5 p-5 card'>
-                    <h3 className="mb-4">Search products:</h3>
+                    <h2 className="mb-4">Search products.</h2>
+                    <h5 
+                        className="mb-4" 
+                        style= {{ color: ads.length === 0 ? 'red' : 'green' }}
+
+                    >Founds: { ads.length }</h5>
                     <Row>
                         <Col md={4} xs={12} >
                             Tag: <TagSelect onChange={this.handleChange} value={ [tags] } />
