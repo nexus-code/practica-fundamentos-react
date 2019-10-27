@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ## Wallakeep: <br>PRACTICE BASICS REACT. VII Full Stack Developer KeepCoding Course.
+=======
+
+## Wallakeep: <br>PRACTICE BASICS REACT. VII Full Stack Developer KeepCoding Course:
+>>>>>>> d5fa50fd395f1617e117174e95b41f641856b768
 
 Wallakeep
 Esta práctica se realizará conjuntamente a la práctica de Nodepop que se realizó
@@ -35,9 +40,12 @@ filtros que proporcione Nodepop (nombre, precio, tag…)<br />
 ser pasado como path param, en su ruta (/advert/:id).<br />
 
 ### Structure and main components
+<<<<<<< HEAD
 
 lorem ipsum
 **lorem ipsum**
 
 
 ### Use `npm i` & `npm start` to run
+=======
+>>>>>>> d5fa50fd395f1617e117174e95b41f641856b768
