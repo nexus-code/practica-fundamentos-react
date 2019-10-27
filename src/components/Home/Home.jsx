@@ -14,8 +14,7 @@ export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
-
-        
+       
         const user = getUserLS();
         if (isEmpty(user)) {
             
@@ -43,22 +42,22 @@ export default class Home extends React.Component {
             })
         });
     }
-
-    componentDidMount() {
-
-        this.recoverContext();
-    }
-
-    gotoRegisterWithoutUser() {
-
-        this.props.history.push("/register");
-    }
+    
+        gotoRegisterWithoutUser() {
+    
+            this.props.history.push("/register");
+        }
 
     recoverContext() {
         //Recover context from localStorage (recovered on this.state.user)
 
         if (isEmpty(this.context.user))
             this.context.updateUser(this.state.user);
+    }
+
+    componentDidMount() {
+
+        this.recoverContext();
     }
 
 

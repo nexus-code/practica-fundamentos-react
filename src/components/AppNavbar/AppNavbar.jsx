@@ -18,9 +18,9 @@ class AppNavbar extends React.Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        {/* <Nav.Link href="/profile">My profile</Nav.Link> */}
                         <Nav.Link className={this.getNavLinkClass("/advert/create")} href="/advert/create">New advert</Nav.Link>
                         <Nav.Link className={this.getNavLinkClass("/advert/")} href="/advert/">Search</Nav.Link>
+                        <Nav.Link href="/profile">My profile</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

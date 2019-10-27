@@ -1,15 +1,15 @@
 import React from "react";
 import { Form, Button } from 'react-bootstrap';
-import { setUserLS }    from '../../utils/localStorage';
 import { UserContext }  from '../../context/UserContext'
+import { setUserLS, getUserLS, isEmpty }    from '../../utils/localStorage';
 import AppNavbar        from '../AppNavbar/AppNavbar';
+import TagSelect        from '../TagsSelect/TagSelect'
 
 
 export default class Profile extends React.Component { 
 
-    /* 
-    Generate user data & save on local storage, if not exits
-    */
+    /* Manage user data */
+    static contextType = UserContext;
 
 
     constructor(props) {
@@ -22,6 +22,17 @@ export default class Profile extends React.Component {
                 tags: ''
             }
         };
+
+        const user = getUserLS();
+        if (isEmpty(user)) {
+
+            this.gotoRegisterWithoutUser();
+        } else {
+
+            this.state = {
+                user: getUserLS()
+            }
+        }        
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,6 +49,23 @@ export default class Profile extends React.Component {
             }
         }));
 
+    }
+
+    gotoRegisterWithoutUser() {
+
+        this.props.history.push("/register");
+    }
+
+    recoverContext() {
+        //Recover context from localStorage (recovered on this.state.user)
+
+        if (isEmpty(this.context.user))
+            this.context.updateUser(this.state.user);
+    }
+
+    componentDidMount() {
+
+        this.recoverContext();
     }
 
     handleSubmit(event) {
@@ -57,8 +85,6 @@ export default class Profile extends React.Component {
             return;
         }
 
-        // Tags pending
-
         setUserLS(this.state.user);
 
         this.context.updateUser(this.state.user);
@@ -67,8 +93,8 @@ export default class Profile extends React.Component {
 
     render (){
         
-        const {name, surname, tags} = this.context.user;
-
+        const { name, surname, tags } = this.state.user;
+console.log(tags);
         return (
             <>
                 <AppNavbar />
@@ -86,7 +112,7 @@ export default class Profile extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="formGrouptags" >
                             <Form.Label>Tags</Form.Label>
-                            <Form.Control name="tags" placeholder="tags" value={ tags } onChange={ this.handleChange } />
+                            <TagSelect onChange={this.handleChange} value={ tags } />
                         </Form.Group>
 
                         <Button variant="primary" type="submit">
@@ -98,5 +124,3 @@ export default class Profile extends React.Component {
         );
     }
 }
-
-Profile.contextType = UserContext;
