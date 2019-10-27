@@ -1,6 +1,6 @@
 import React from "react";
 import AppNavbar from '../AppNavbar/AppNavbar';
-import { Form }  from 'react-bootstrap';
+import { Container, Row, Col, Button }  from 'react-bootstrap';
 import AdList    from '../AdList/AdList';
 import TagSelect from '../TagsSelect/TagSelect'
 import Input     from '../Input/Input'
@@ -30,34 +30,29 @@ export default class Search extends React.Component {
             this.state = {
                 ads: [],
                 tags: '',
-                // minPrice: '',
-                // maxPrice: '',
                 type: '',
-                name: ''
+                name: '',
+                minPrice: '',
+                maxPrice: ''
             }
 
             this.searchAds();
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     searchAds = () => {
 
+        const { tags, name, type } = this.state;
+        let searchString = tags === '' ? '' : `tag=${tags}&`;
+        searchString += name === '' ? '' : `name=${name}&`;
         
-        const { tags, name } = this.state;
-        let searchString = tags === '' ? '' : `tag=${this.state.tags}&`;
-        searchString += name === '' ? '' : `name=${this.state.name}&`;
-        // const searchString = `tag=work&`
+        if(type !== '')
+            searchString += type === 'sell' ? 'venta=true&' : `venta=false&`;
+        
 
-        console.log('tags', tags);
-
-        console.log('searchString', searchString);
-        // console.log('tags', tags);
-        // console.log('this.state', this.state);
-
-
-        // API.searchAds(`tag=${this.state.user.tags}`).then(ads => {
         API.searchAds(searchString)
             .then(ads => {
             this.setState({
@@ -94,7 +89,13 @@ export default class Search extends React.Component {
             [name]: value
         }, () => this.searchAds()); // search after setState via callback
 
-    }   
+    }
+    
+    reset () {
+        
+        window.location.reload(false);
+    }
+    
 
     render() {
         const { ads, tags, name, type } = this.state;
@@ -102,37 +103,49 @@ export default class Search extends React.Component {
         return (
             <>
                 <AppNavbar />
-                <div className='container mt-5 mb-5'>
+                <Container className='container mt-5 mb-5 p-5 card'>
                     <h3 className="mb-4">Search products:</h3>
-                        
-                    <div className="col-5 mb-3">
-                        Tag: <TagSelect onChange={this.handleChange} value={tags} />
-                    </div>
-                    <div className="col-5 mb-3">
-                        Name: <Input onChange={this.handleChange} name={`name`} value={name} placeholder={`Pulse enter to end`} />
-                    </div>
-                    <div className="col-5 mb-3">
-                        Type:
-                        <div key={`inline-${type}`} className="mb-3">
-                            {TYPES.map(type => (
-                                <div key={`inline-${type}`} className="mb-3">
-                                    <Form.Check inline type='radio' id={`check-api-${type}`}>
-                                        <Form.Check.Input
-                                            name='type'
-                                            value={`${type}`}
-                                            type='radio'
-                                            onChange={this.handleChange}
-                                            checked={`${type}` === type}
-                                        />
-                                        <Form.Check.Label style={{ textTransform: 'capitalize' }}>{` ${type}`}</Form.Check.Label>
-                                    </Form.Check>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    <Row>
+                        <Col md={4} xs={12} >
+                            Tag: <TagSelect onChange={this.handleChange} value={tags} />
+                        </Col>
+                        <Col md={4} xs={12} >
+                            Name: <br/><Input clasName="formControl" onChange={this.handleChange} name={`name`} value={name} placeholder={`Pulse enter to end`} />
+                        </Col>
+                        <Col md={2} xs={12} >
+                            Type:
+                            <div key={`inline-${type}`}>
+                                {TYPES.map(type => (
+                                    <div key={`${type}`}>
+                                        <input type='radio'
+                                                name='type'
+                                                value={`${type}`}
+                                                onChange={this.handleChange}
+                                                // checked={`${type}` === type}
+                                            />
+                                            <span style={{ textTransform: 'capitalize' }}>{` ${type}`}  </span>
+                                    </div>
+                                ))}
+                            </div>
+                        </Col>        
+                    </Row>
+                    <Row>
+                        <Col xs={12} >
 
-
-                </div>
+                            Price:<br />
+                            <Input clasName="formControl" onChange={this.handleChange} name={`minPrice`} value={name} placeholder={`Min price`} />
+                            /
+                            <Input clasName="formControl" onChange={this.handleChange} name={`maxPrice`} value={name} placeholder={`Max price`} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} >
+                            <Button variant="primary" className="float-right" onClick={this.reset}>
+                                Reset
+                            </Button>
+                        </Col> 
+                    </Row>           
+                </Container>
 
                 {
                     ads
