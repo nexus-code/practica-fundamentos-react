@@ -3,15 +3,6 @@ import PropTypes from 'prop-types';
 import { withRouter }  from 'react-router-dom'
 import { Navbar, Nav } from 'react-bootstrap';
 
-
-// Implement App requirement:
-// - Si un usuario se ha registrado, accede, por ejemplo, al listado de anuncios y recarga la página el sistema deberá obtener el usuario del LocalStorage y
-// almacenarlo en el contexto para así no perder al usuario de la aplicación.Este comportamiento debe ser el mismo en el detalle de un anuncio o en el crear /  actualizar un anuncio.
-
-
-// + https://react-bootstrap.github.io/components/navbar/
-// - https://medium.com/@leonardellifernando/reactjs-navbar-con-bootstrap-y-react-router-85f8ba82edc1
-
 class AppNavbar extends React.Component {
    
     getNavLinkClass = (path) => {

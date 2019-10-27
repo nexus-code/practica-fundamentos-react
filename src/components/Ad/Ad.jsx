@@ -16,22 +16,22 @@ class Ad extends React.Component {
             
                 <div
                     style={{
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        borderColor: ad.type === 'sell' ? 'orange' : 'blue'
                     }}
                     key={ ad.id }
                     className='card'
                     onClick={ this.goToDetail }
                 >
-                    <div className='card-header'>{ad.type}</div>
+                    <div className='card-header'
+                        style={{
+                            color: ad.type === 'sell' ? 'orange' : 'blue',
+                            textTransform: 'uppercase'
+                        }}
+                    >{ad.type}</div>
                     <img className='card-img-top text-center'  src={ ad.photo } alt={ ad.name } />
                     <div className='card-body'>
-                        <h5 className='card-title'
-                            style={{
-                                color: ad.type = 'sell' ? 'green' : 'blue'
-                            }}
-                        >
-                            { ad.name }
-                        </h5>
+                        <h5 className='card-title'>{ ad.name }</h5>
                         <h2 className='text-center'><span className='badge badge-primary'>{ ad.price } €</span></h2>                
                         <p className='card-text'>{ ad.description }</p>
                     </div>
