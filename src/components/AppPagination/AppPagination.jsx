@@ -9,6 +9,7 @@ import { Pagination } from 'react-bootstrap';
 
 class AppPagination extends React.Component {
     
+
     constructor(props) {
         super(props)
 
@@ -28,7 +29,9 @@ class AppPagination extends React.Component {
     goTo(index){
 
         this.setState({ pages: this.state.pages, currentPage: index });
-        this.props.history.push(`/home?page=${index}`);
+        
+        const path = `${this.props.location.pathname}?page=${index}`;
+        this.props.history.push(path);
     } 
 
     gotoFirst(){

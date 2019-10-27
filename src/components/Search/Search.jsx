@@ -28,11 +28,11 @@ export default class Search extends React.Component {
 
             this.state = {
                 ads: [],
-                tags: '',
-                minPrice: '',
-                maxPrice: '',
-                type: '',
-                name: ''
+                // tags: '',
+                // minPrice: '',
+                // maxPrice: '',
+                // type: '',
+                // name: ''
             }
 
             this.searchAds();
@@ -45,9 +45,11 @@ export default class Search extends React.Component {
 
         
         const { tags, ads } = this.state;
-        const searchString = `?tag=${tags}&`
+        const searchString = `?tag=${this.state.tags}&`
 
         console.log('searchString', searchString);
+        console.log('tags', tags);
+        console.log('this.state', this.state);
 
 
         // API.searchAds(`tag=${this.state.user.tags}`).then(ads => {
@@ -93,9 +95,13 @@ export default class Search extends React.Component {
         this.searchAds();
     }   
 
+
     render() {
         const { ads, tags, type } = this.state;
         console.log(this.state);
+        console.log(this.props.location.pathname);
+
+
 
         return (
             <>
