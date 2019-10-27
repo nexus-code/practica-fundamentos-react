@@ -8,18 +8,30 @@ import AdList from './AdList';
 
 class Search extends React.Component {
 
+    /* Show ads by user selected tag */
+
     static contextType = UserContext;
+
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            ads: [],
-            query: '',
-            user: getUserLS()
+
+        const user = getUserLS();
+        if (isEmpty(user)) {
+
+            this.gotoRegisterWithoutUser();
+            this.state = { ads: [] };
+        } else {
+
+            this.state = {
+                ads: [],
+                user: getUserLS()
+            }
+
+            this.searchAds();
         }
 
-        this.searchAds();
     }
 
     searchAds = () => {
@@ -33,24 +45,26 @@ class Search extends React.Component {
         });
     }
 
+    componentDidMount() {
+
+        this.recoverContext();
+    }
+
+    gotoRegisterWithoutUser() {
+
+        this.props.history.push("/register");
+    }
 
     recoverContext() {
-
-        //mejorar
-
-        console.log('recoverContext context pre', this.context);
-
+        //Recover context from localStorage (recovered on this.state.user)
 
         if (isEmpty(this.context.user))
             this.context.updateUser(this.state.user);
-
-        console.log('recoverContext context post', this.context);
     }
 
 
     render() {
         const { ads } = this.state;
-        this.recoverContext();
 
         return (
             <>
@@ -67,5 +81,3 @@ class Search extends React.Component {
         );
     }
 }
-
-export default withRouter(Search);
