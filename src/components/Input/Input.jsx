@@ -6,9 +6,8 @@ export default class Input extends React.Component {
         const value = e.target.value;
 
         if (e.keyCode === 13) {
-            // this.context.onSubmit(value);
-            // this.props.onChange(value);
-            this.props.onChange({ target: { name: 'name', value: value } });
+            
+            this.props.onChange({ target: { name: this.props.name, value: value } });
 
         }
     }

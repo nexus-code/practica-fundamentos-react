@@ -45,13 +45,20 @@ export default class Search extends React.Component {
 
     searchAds = () => {
 
-        const { tags, name, type } = this.state;
+        // Mounting searchString to send to the API
+        const { tags, name, type, minPrice, maxPrice } = this.state;
+        
         let searchString = tags === '' ? '' : `tag=${tags}&`;
         searchString += name === '' ? '' : `name=${name}&`;
         
         if(type !== '')
             searchString += type === 'sell' ? 'venta=true&' : `venta=false&`;
         
+        searchString += (minPrice !== '' || maxPrice !== '') ? 'Price=' : '';
+
+        searchString += minPrice === '' ? '' : `${minPrice}`;
+        searchString += maxPrice === '' ? '' : `-${maxPrice}`;
+
 
         API.searchAds(searchString)
             .then(ads => {
@@ -98,7 +105,7 @@ export default class Search extends React.Component {
     
 
     render() {
-        const { ads, tags, name, type } = this.state;
+        const { ads, tags, name, type, minPrice, maxPrice } = this.state;
 
         return (
             <>
@@ -110,7 +117,7 @@ export default class Search extends React.Component {
                             Tag: <TagSelect onChange={this.handleChange} value={tags} />
                         </Col>
                         <Col md={4} xs={12} >
-                            Name: <br/><Input clasName="formControl" onChange={this.handleChange} name={`name`} value={name} placeholder={`Pulse enter to end`} />
+                            Name: <br/><Input clasName="formControl" onChange={this.handleChange} name={`name`} value={name} placeholder={`Pulse enter to send`} />
                         </Col>
                         <Col md={2} xs={12} >
                             Type:
@@ -133,9 +140,9 @@ export default class Search extends React.Component {
                         <Col xs={12} >
 
                             Price:<br />
-                            <Input clasName="formControl" onChange={this.handleChange} name={`minPrice`} value={name} placeholder={`Min price`} />
+                            <Input clasName="formControl" onChange={this.handleChange} name={`minPrice`} value={minPrice} placeholder={`Min price. Enter to send`} />
                             /
-                            <Input clasName="formControl" onChange={this.handleChange} name={`maxPrice`} value={name} placeholder={`Max price`} />
+                            <Input clasName="formControl" onChange={this.handleChange} name={`maxPrice`} value={maxPrice} placeholder={`Max price. Enter to send`} />
                         </Col>
                     </Row>
                     <Row>
